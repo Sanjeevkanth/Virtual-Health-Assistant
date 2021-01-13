@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap-4.5.0-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<br><div class="text-center text-primary font-weight-bold font-italic"><h1><u>Admin Panel</u></h1></div>
+	<div class="text-center font-weight-bold"><h3>Verified the Doctor's Login (or) Laboratory Login (or) Hospital Login</h3></div><br>
+	<div class="text-center">
+		<button class="btn-info doc1" style="border-radius: 10px;" onclick="doctorverify()">Doctor</button>
+		<button class="btn-info lab1" style="border-radius: 10px;margin-left: 2%;" onclick="labverify()">Laboratory</button>
+		<button class="btn-info hos1" style="border-radius: 10px;margin-left: 2%;" onclick="hosverify()">Hospital</button>
+	</div><br><br>
+	<script>
+	function doctorverify(){
+		var xml1=new XMLHttpRequest();
+		xml1.onreadystatechange=function(){
+			if(xml1.readyState==4){
+				var txt=xml1.responseText;
+				document.getElementById("verifydoctor").innerHTML=txt;
+				
+			}
+		};
+		parmas="type=doctor";
+		xml1.open("POST",action="verifiy_doctor_lab", true);
+		xml1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml1.send(parmas);
+	}
+		
+	function labverify(){
+		var xml=new XMLHttpRequest();
+		xml.onreadystatechange=function(){
+			if(xml.readyState==4){
+				var txt1=xml.responseText;
+				document.getElementById("verifylab").innerHTML=txt1;
+				
+			}
+		};
+		parmas="type=lab";
+		xml.open("POST",action="verifiy_doctor_lab", true);
+		xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml.send(parmas);
+	}
+	function hosverify(){
+		var xml=new XMLHttpRequest();
+		xml.onreadystatechange=function(){
+			if(xml.readyState==4){
+				var txt1=xml.responseText;
+				document.getElementById("verifyhos").innerHTML=txt1;
+				
+			}
+		};
+		parmas="type=hos";
+		xml.open("POST",action="verifiy_doctor_lab", true);
+		xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml.send(parmas);
+	}
+	</script>
+	<div class="collapse doctor container-fluid">
+		<table class="table table-striped  table-hover text-center" style="border:1;width:100%;">
+		<thead>
+			<tr>
+			<th>
+				S.No
+			</th>
+			<th>
+				Doctor Name
+			</th>
+			<th>
+				Doctor Email
+			</th>
+			<th>
+				Phone Number
+			</th>
+			<th>
+				Department
+			</th>
+			<th>
+				Hospital
+			</th>
+			<th>
+				Hospital Address
+			</th>
+			<th>
+				City
+			</th>
+			<th>
+				Verified
+			</th>
+		</thead>
+		<tbody id="verifydoctor">
+	
+		</tbody>
+	
+	  </table>
+	</div>
+	
+	<script type="text/javascript">
+		
+		function verifydoc(ef){
+			var e="emailver"+ef;
+			var emailver=document.getElementById(e).value;
+			
+			var xml1=new XMLHttpRequest();
+			xml1.onreadystatechange=function(){
+				if(xml1.readyState==4){
+					var txt=xml1.responseText;
+					document.getElementById("verifydoctor").innerHTML=txt;
+					
+				}
+			};
+			parmas="emailid="+emailver+"&type=docver";
+			xml1.open("POST",action="verifiy_doctor_lab", true);
+			xml1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml1.send(parmas);
+		}
+		
+		function verifylab(ef){
+			var e="emailver"+ef;
+			var emailver=document.getElementById(e).value;
+			
+			var xml2=new XMLHttpRequest();
+			xml2.onreadystatechange=function(){
+				if(xml2.readyState==4){
+					var txt2=xml2.responseText;
+					document.getElementById("verifylab").innerHTML=txt2;
+					
+				}
+			};
+			parmas="emailid="+emailver+"&type=labver";
+			xml2.open("POST",action="verifiy_doctor_lab", true);
+			xml2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml2.send(parmas);
+		}
+		function verifyhos(ef){
+			var e="emailver"+ef;
+			var emailver=document.getElementById(e).value;
+			
+			var xml5=new XMLHttpRequest();
+			xml5.onreadystatechange=function(){
+				if(xml5.readyState==4){
+					var txt=xml5.responseText;
+					document.getElementById("verifyhos").innerHTML=txt;
+					
+				}
+			};
+			parmas="emailid="+emailver+"&type=hosver";
+			xml5.open("POST",action="verifiy_doctor_lab", true);
+			xml5.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml5.send(parmas);
+		}
+		function verifylabcancel(ef){
+			var e="emailver"+ef;
+			var emailver=document.getElementById(e).value;
+			
+			var xml3=new XMLHttpRequest();
+			xml3.onreadystatechange=function(){
+				if(xml3.readyState==4){
+					var txt3=xml3.responseText;
+					document.getElementById("verifylab").innerHTML=txt3;
+					
+				}
+			};
+			parmas="emailid="+emailver+"&type=labvercancel";
+			xml3.open("POST",action="verifiy_doctor_lab", true);
+			xml3.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml3.send(parmas);
+		}
+		function verifydoccancel(ef){
+			var e="emailver"+ef;
+			var emailver=document.getElementById(e).value;
+			
+			var xml4=new XMLHttpRequest();
+			xml4.onreadystatechange=function(){
+				if(xml4.readyState==4){
+					var txt4=xml4.responseText;
+					document.getElementById("verifydoctor").innerHTML=txt4;
+					
+				}
+			};
+			parmas="emailid="+emailver+"&type=docvercancel";
+			xml4.open("POST",action="verifiy_doctor_lab", true);
+			xml4.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml4.send(parmas);
+		}
+		function verifyhoscancel(ef){
+			var e="emailver"+ef;
+			var emailver=document.getElementById(e).value;
+			
+			var xml6=new XMLHttpRequest();
+			xml6.onreadystatechange=function(){
+				if(xml6.readyState==4){
+					var txt6=xml6.responseText;
+					document.getElementById("verifyhos").innerHTML=txt6;
+					
+				}
+			};
+			parmas="emailid="+emailver+"&type=hosvercancel";
+			xml6.open("POST",action="verifiy_doctor_lab", true);
+			xml6.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml6.send(parmas);
+		}
+	</script>
+	<div class="collapse lab container-fluid">
+		<table class="table table-striped  table-hover text-center" style="border:1;width:100%;">
+		<thead>
+			<tr>
+			<th>
+				S.No
+			</th>
+			<th>
+				Lab Name
+			</th>
+			<th>
+				Lab Email
+			</th>
+			<th>
+				Lab Phone Number
+			</th>
+			<th>
+				Lab Address
+			</th>
+			<th>
+				City
+			</th>
+			<th>
+				Verified
+			</th>
+		</thead>
+		<tbody id="verifylab">
+	
+		</tbody>
+	
+	  </table>
+	</div>
+	
+	<div class="collapse hos container-fluid">
+		<table class="table table-striped  table-hover text-center" style="border:1;width:100%;">
+		<thead>
+			<tr>
+			<th>
+				S.No
+			</th>
+			<th>
+				Hospital Name
+			</th>
+			<th>
+				Hospital Email
+			</th>
+			<th>
+				Hospital Phone Number
+			</th>
+			<th>
+				Hospital Address
+			</th>
+			<th>
+				City
+			</th>
+			<th>
+				Verified
+			</th>
+		</thead>
+		<tbody id="verifyhos">
+	
+		</tbody>
+	
+	  </table>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+      		$(".doc1").click(function(){
+      			$(".lab").collapse('hide');
+      			$(".doctor").collapse('show');
+      			$(".hos").collapse('hide');
+      		});
+      		$(".lab1").click(function(){
+      			$(".doctor").collapse('hide');
+      			$(".lab").collapse('show');
+      			$(".hos").collapse('hide');
+      		});
+      		$(".hos1").click(function(){
+      			$(".doctor").collapse('hide');
+      			$(".lab").collapse('hide');
+      			$(".hos").collapse('show');
+      		});
+      	});
+	</script>
+</body>
+</html>

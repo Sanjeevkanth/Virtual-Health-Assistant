@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Verification</title>
+<link rel="stylesheet" href="bootstrap-4.5.0-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+	<script>
+	b= localStorage.getItem("myvalue");
+	//document.getElementById("docname").innerHTML=b;
+
+	var xml1=new XMLHttpRequest();
+	xml1.onreadystatechange=function(){
+		if(xml1.readyState==4){
+			var txt=xml1.responseText;
+			document.getElementById("docname").innerHTML="Welcome Dr."+txt;
+			
+		}
+	};
+	var parmas="email="+b+"&type=name";
+	xml1.open("POST",action="appointment", true);
+	xml1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xml1.send(parmas);
+	</script>
+	<br><div class="text-center text-primary font-weight-bold font-italic"><h1 id="docname"></h1></div><br>
+	<h4 class="text-center">Your verification is being in process.You can wait until finishing the verification process.<br>After Verification you can Login your Account.</h4><br><br><br>
+	<div class="row justify-content-center">
+	<div class="spinner-border text-primary"></div>
+	<pre><h4>  ->  Verification is in process.......</h4></pre></div>
+</body>
+</html>

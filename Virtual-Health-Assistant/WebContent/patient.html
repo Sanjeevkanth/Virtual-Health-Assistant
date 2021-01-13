@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <style>
+    
+.a1:hover{
+          margin-top: -1.5%;
+          background-color: #0000ff;
+
+        }
+        .verticalline{
+        	border-right: 1px solid #333;
+  			
+        }
+  </style>
+  
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-info navbar-dark">
+    <h4>patient</h4>
+    <button class="navbar-toggler btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar" style="margin-right: 3%;">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-white main1" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <div class="dropdown" style="margin-right: 3%;">
+          <a href="#" data-toggle="dropdown" class="nav-link text-white dropdown-toggle">Appointments</a>
+          <div class="dropdown-menu bg-success">
+            <a class="dropdown-item text-dark upcomming" href="#" onclick="upcommingappointment()">Upcomming Appointment</a>
+            <a class="dropdown-item text-dark appnow" href="#">New Appointment</a>
+          </div>
+        </div>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">details</a>
+      </li>    
+    </ul>
+  </div> 
+  </nav>
+  <div class="collapse show main">
+  <img src="patient.jpeg" class="img-fluid" style="height: 74vh; width: 100vw;">
+  <div class="container-fluid row collapse show front justify-content-center " style="margin-top: -5%;">
+    
+    <div class="card a1 col-md-3 col-sm-6 col-xs-2" style="background-color: #00e6e6;border-top-right-radius: 15%;border-bottom-left-radius: 15%;">
+      <div class="card-body text-dark"><h4 style="margin-top: 2%;"><b>Appointment</b></h4>
+        <p>Which problem you faced on your health? call or mail to doctor and make an appointment.</p><br>
+        <button class="btn-info appnow" style="border-radius: 18px;margin-top: 1%;">Appointment Now</button></div>
+    </div>
+    <div class="card a1 col-md-3 col-sm-6 col-xs-2" style="background-color: #00e6e6;border-top-right-radius: 15%;border-bottom-left-radius: 15%;">
+      <div class="card-body text-dark"><h4 style="margin-top: 2%;"><b>Doctor's schedule</b></h4>
+        <p>Take a look on our clinic Doctor's Time table and make an appointment.</p><br>
+        <button class="btn-info viewDoctorSchedule1" style="border-radius: 18px;margin-top: 1%;">View timetable</button></div>
+    </div>
+    <div class="card a1 col-md-3 col-sm-6 col-xs-2" style="background-color: #00e6e6;border-top-right-radius: 15%;border-bottom-left-radius: 15%;">
+      <div class="card-body text-dark"><h4 style="margin-top: 2%;"><b>History</b></h4>
+        <p>If u want see your History.</p><br><br><br>
+        <button class="btn-info" style="border-radius: 18px;margin-top: 1%;">More details</button></div>
+    </div>
+  
+  </div></div>
+  	<div class="collapse search">
+		<div class="container-fluid text-center" style="background-color:#79ff4d;">
+			<br><h2 class="text-dark font-weight-bold font-italic">Find the Doctor & Make an appointment!</h2><br>
+			<div class="collapse show bydoctorname111">
+      			<input type="text" id="doctorname" placeholder="Enter the Doctor Name"><button class="btn-success " onclick="bydoctorname()">Search</button><br><br>
+      		</div>
+      		<div class="collapse byhospitalname1">
+      			<input type="text" id="hospitalname" placeholder="Enter the Hospital Name"><button class="btn-success " onclick="bydatesearch()">Search</button><br><br>
+      		</div>
+      		<div class="collapse bydepartmentname1">
+      			<input type="text" id="departmentname" placeholder="Enter the Department Name"><button class="btn-success " onclick="bydatesearch()">Search</button><br><br>
+      		</div>
+      		<br><button class="btn-info bydoctorname112" style="margin-right:1%;border-radius: 18px;">By Doctor Name</button>
+      		<button class="btn-info byhospitalname" style="margin-right:1%;border-radius: 18px;">By Hospital Name</button>
+      		<button class="btn-info bydepartmentname" style="margin-right:1%;border-radius: 18px;">By Department Name</button>
+		<br><br><br></div>
+	</div>
+	<div class="row container-fluid bydoctorname collapse">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<br><table class="table table-bordered text-center">
+			<thead>
+				<tr>
+					<th>S.no</th>
+					<th>Doctor name</th>
+					<th>Hospital Name</th>
+					<th>Hospital Address</th>
+					<th>Department</th>
+					<th>District</th>
+					<th>Make an Appointment</th>
+				</tr>
+			</thead>
+			<tbody id="searchdetails"></tbody>
+			
+		</table>
+		
+		</div>
+	</div>
+<div class="makeapp collapse container-fluid">
+	<img src="patientapp.jpeg" width="100%">
+	<div class="row container-fluid">
+		<div class="col-md-1 text-center" style="background-color:#79ff4d;"><i class='fas fa-clipboard-list' style="font-size:30px;"></i></div>
+		<div class="col-md-6"></div>
+		<div class="col-md-1 text-center" style="background-color:#79ff4d;"><i class='fas fa-clipboard-check' style="font-size:30px;"></i></div>
+	</div>
+	<div class="row container-fluid">
+	<div class="col-md-6 card" style="background-color:#79ff4d;">
+		<div class="card-body">
+			<div class="row">
+			<div class="col-md-5 verticalline">
+				<h5>Doctor Name:</h5>
+				<h6 class="text-info" id="docname">Name</h6>
+				<hr>
+				<h5>Email:</h5>
+				<h6 class="text-info" id="docemail">Email</h6>
+				<hr>
+				<h5>Contact No:</h5>
+				<h6 class="text-info" id="doccontact">Number</h6>
+				<hr>
+			</div>
+			<div class="col-md-6">
+				<h5>Doctor Time Table:</h5>
+				<h5 class="text-info" id="doctime">Time</h5>
+				<hr>
+			</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-1"></div>
+	<div class="col-md-5 card" style="background-color:#79ff4d;">
+		<div class="card-body">
+			
+				<h6><label>Enter Request Appointment Date & Time:</label></h6>
+				<input type="date" id="reqappdate" placeholder="Enter the Date">
+				<input type="time" id="reqapptime" placeholder="Enter the Date">
+				<hr>
+				
+				<h6><label>Treatment:</label></h6>
+				<input type="text" id="reqtreatment" placeholder="Enter the Treatment"><br><br>
+				<div class="text-center">
+				<button class="btn btn-info text-center" onclick="reqapp()">Make an Appointment</button>
+				</div>
+		</div>
+	</div>
+	</div>
+	<div id="ss"></div>
+</div> 
+
+<div class="viewDoctorSchedule collapse">
+	<div class="container-fluid text-center" style="background-color:#79ff4d;">
+			<br><h2 class="text-dark font-weight-bold font-italic">Find the Doctor & view their TimeTable & Contact Number.</h2><br>
+			<div class="collapse show detailsdoctorname1">
+      			<input type="text" id="detailDocName" placeholder="Enter the Doctor Name"><button class="btn-success " onclick="detailDoctorName()">Search</button><br><br>
+      		</div>
+      		<div class="collapse detailsCity1 container row">
+      		<div class="col-md-6"></div>
+      		<div class="col-md-3" style="margin-left:-25px;">
+      			<select class="form-control" id="detailDocCity" name="detailDocCity">
+                                <option>None</option>
+                                <option>Ariyalur</option>
+                                <option>Chengalpattu</option>
+                                <option>Chennai</option>
+                                <option>Coimbatore</option>
+                                <option>Cuddalore</option>
+                                <option>Dharmapuri</option>
+                                <option>Dindigul</option>
+                                <option>Erode</option>
+                                <option>Kallakurichi</option>
+                                <option>Kanchipuram</option>
+                                <option>Kanyakumari</option>
+                                <option>Karur</option>
+                                <option>Krishnagiri</option>
+                                <option>Madurai</option>
+                                <option>Mayiladuthurai</option>
+                                <option>Nagapattinam</option>
+                                <option>Namakkal</option>
+                                <option>Nilgiris</option>
+                                <option>Perambalur</option>
+                                <option>Pudukkottai</option>
+                                <option>Ramanathapuram</option>
+                                <option>Ranipet</option>
+                                <option>Salem</option>
+                                <option>Sivagangai</option>
+                                <option>Tenkasi</option>
+                                <option>Thanjavur</option>
+                                <option>Theni</option>
+                                <option>Thoothukudi</option>
+                                <option>Tiruchirappalli</option>
+                                <option>Tirunelveli</option>
+                                <option>Tirupattur</option>
+                                <option>Tiruppur</option>
+                                <option>Tiruvallur</option>
+                                <option>Tiruvannamalai</option>
+                                <option>Tiruvarur</option>
+                                <option>Vellore</option>
+                                <option>Viluppuram</option>
+                                <option>Virudhunagar</option>
+                              </select></div>
+                              <div class="col-md-1" style="margin-left:-30px;margin-top:2px;">
+                              <button class="btn-success text-left" onclick="detailsDoctorcity()">Search</button><br><br>
+                              </div>
+      		</div>
+      		<br><button class="btn-info detailsdoctorname" style="margin-right:1%;border-radius: 18px;">By Doctor Name</button>
+      		<button class="btn-info detailsCity" style="margin-right:1%;border-radius: 18px;">By District Name</button>
+      		
+		<br><br><br></div>
+</div>
+
+<div class="row container-fluid detailsForContact collapse ">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<br><table class="table table-bordered text-center">
+			<thead>
+				<tr>
+					<th>S.no</th>
+					<th>Doctor name</th>
+					<th>Hospital Name</th>
+					<th>Hospital Address</th>
+					<th>Department</th>
+					<th>District</th>
+					<th>Opening Hours</th>
+					<th>Contact Number</th>
+				</tr>
+			</thead>
+			<tbody id="detailsforcontact"></tbody>
+		
+		</table>
+	
+	</div>
+</div>
+
+<div class="row container-fluid upcomming1 collapse ">
+	
+	<div class="col-md-12">
+		<br><table class="table table-bordered text-center">
+			<thead>
+				<tr>
+					<th>S.no</th>
+					<th>Doctor name</th>
+					<th>Hospital Name</th>
+					<th>Hospital Address</th>
+					<th>Treatment</th>
+					<th>District</th>
+					<th>Appointment Date</th>
+					<th>Appointment Time</th>
+					<th>Contact Number</th>
+					<th>Confirm or Not</th>
+					<th>Token No</th>
+				</tr>
+			</thead>
+			<tbody id="showappointment"></tbody>
+		
+		</table>
+	
+	</div>
+</div>
+
+<script>
+	b= localStorage.getItem("mypatientemail");
+	
+	function bydoctorname(){
+		var doctorname=document.getElementById("doctorname").value;
+		var xml1=new XMLHttpRequest();
+		xml1.onreadystatechange=function(){
+			if(xml1.readyState==4){
+				var txt=xml1.responseText;
+				document.getElementById("searchdetails").innerHTML=txt;
+				$(document).ready(function(){
+					$(".bydoctorname").collapse('show');
+	    		});
+			}
+		};
+		var parmas="doctorname="+doctorname+"&type=searchbydoctorname";
+		xml1.open("POST",action="appointment", true);
+		xml1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml1.send(parmas);
+	}
+	var email;
+	var name;
+	var hosid;
+	function makeanappointment(a){
+		var id="byname"+a;
+		email= document.getElementById(id).value;
+		
+		var xml2=new XMLHttpRequest();
+		xml2.onreadystatechange=function(){
+			if(xml2.readyState==4){
+				var txt1=xml2.responseText;
+				var res=txt1.split("|||");
+				document.getElementById("docname").innerHTML=res[0];
+				name=res[0];
+				document.getElementById("docemail").innerHTML=res[1];
+				document.getElementById("doccontact").innerHTML=res[2];
+				document.getElementById("doctime").innerHTML=res[3];
+				hosid=res[4];
+				$(document).ready(function(){
+					$(".makeapp").collapse('show');
+					$(".search").collapse('hide');
+					$(".bydoctorname").collapse('hide');
+				});
+			}
+		};
+		var parmas="doctoremail="+email+"&type=searchdoctordetails";
+		xml2.open("POST",action="appointment", true);
+		xml2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml2.send(parmas);
+		
+	}
+	function reqapp(){
+		var date=document.getElementById("reqappdate").value;
+		var time=document.getElementById("reqapptime").value;
+		var treatment=document.getElementById("reqtreatment").value;
+		if(date==""){
+			alert("Enter the Appointment Date");
+		}
+		else if(time==""){
+			alert("Enter the Appointment Time");
+		}
+		else if(treatment==""){
+			alert("Enter the Treatment");
+		}
+		else{
+			
+			var xml3=new XMLHttpRequest();
+			xml3.onreadystatechange=function(){
+				if(xml3.readyState==4){
+					var txt3=xml3.responseText;
+					//document.getElementById("searchdetails").innerHTML=txt;
+					alert(txt3);
+				}
+			};
+			var parmas="date="+date+"&time="+time+"&treatment="+treatment+"&patiemail="+b+"&docname="+name+"&docemail="+email+"&hosid="+hosid+"&type=reqapp";
+			xml3.open("POST",action="appointment", true);
+			xml3.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml3.send(parmas);
+		}
+		
+	}
+	function detailDoctorName(){
+		var docName=document.getElementById("detailDocName").value;
+		if(docName==""){
+			alert("Enter the Doctor Name!!!");
+		}
+		else{
+			var xml4=new XMLHttpRequest();
+			xml4.onreadystatechange=function(){
+				if(xml4.readyState==4){
+					var txt4=xml4.responseText;
+					document.getElementById("detailsforcontact").innerHTML=txt4;
+					$(document).ready(function(){
+						$(".detailsForContact").collapse('show');
+		    		});
+				}
+			};
+			var parmas="name="+docName+"&type=detailsDoctName";
+			xml4.open("POST",action="appointment", true);
+			xml4.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml4.send(parmas);
+		}
+	}
+	function detailsDoctorcity(){
+		var docCity=document.getElementById("detailDocCity").value;
+		if(docCity=="None"){
+			alert("Enter the City!!!");
+		}
+		else{
+			var xml5=new XMLHttpRequest();
+			xml5.onreadystatechange=function(){
+				if(xml5.readyState==4){
+					var txt5=xml5.responseText;
+					document.getElementById("detailsforcontact").innerHTML=txt5;
+					$(document).ready(function(){
+						$(".detailsForContact").collapse('show');
+		    		});
+				}
+			};
+			var parmas="city="+docCity+"&type=detailsDoctCity";
+			xml5.open("POST",action="appointment", true);
+			xml5.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml5.send(parmas);
+		}
+	}
+	
+	function upcommingappointment(){
+		var xml6=new XMLHttpRequest();
+		xml6.onreadystatechange=function(){
+			if(xml6.readyState==4){
+				var txt6=xml6.responseText;
+				document.getElementById("showappointment").innerHTML=txt6;
+			}
+		};
+		var parmas="email="+b+"&type=showappointment";
+		xml6.open("POST",action="appointment", true);
+		xml6.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml6.send(parmas);
+	}
+	
+	function cancelappointment(z){
+		var id="cancelappointment"+z;
+		email= document.getElementById(id).value;
+		var xml7=new XMLHttpRequest();
+		xml7.onreadystatechange=function(){
+			if(xml7.readyState==4){
+				var txt7=xml7.responseText;
+				document.getElementById("showappointment").innerHTML=txt7;
+			}
+		};
+		var result=email.split("&&");
+		
+		var parmas="pati_email="+result[0]+"&doc_email="+result[1]+"&app_time="+result[2]+"&app_date="+result[3]+"&treatment="+result[4]+"&type=cancelappointment";
+		xml7.open("POST",action="appointment", true);
+		xml7.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml7.send(parmas);
+	}
+</script>
+
+<script>
+	$(document).ready(function(){
+	    $(".appnow").click(function(){
+	      $(".main").collapse('hide');
+	      $(".search").collapse('show');
+	      $(".upcomming1").collapse('hide');
+	      $(".viewDoctorSchedule").collapse('hide');
+	      $(".detailsForContact").collapse('hide');
+	    });
+	    $(".main1").click(function(){
+	      $(".main").collapse('show');
+	      $(".search").collapse('hide');
+	      $(".bydoctorname").collapse('hide'); 
+	      $(".makeapp").collapse('hide'); 
+	      $(".viewDoctorSchedule").collapse('hide'); 
+	      $(".detailsForContact").collapse('hide'); 
+	      $(".upcomming1").collapse('hide');
+	    });
+	    $(".bydoctorname112").click(function(){
+	      $(".byhospitalname1").collapse('hide');
+	      $(".bydepartmentname1").collapse('hide');
+	      $(".bydoctorname111").collapse('show');
+	    });
+	    $(".byhospitalname").click(function(){
+	      $(".byhospitalname1").collapse('show');
+	      $(".bydepartmentname1").collapse('hide');
+	      $(".bydoctorname111").collapse('hide');
+	    });
+	    $(".bydepartmentname").click(function(){
+	      $(".byhospitalname1").collapse('hide');
+	      $(".bydepartmentname1").collapse('show');
+	      $(".bydoctorname111").collapse('hide');
+	    });
+	    $(".viewDoctorSchedule1").click(function(){
+	      $(".main").collapse('hide');
+	      $(".viewDoctorSchedule").collapse('show');
+	      $(".search").collapse('hide');
+	    });
+	    $(".detailsdoctorname").click(function(){
+	      $(".detailsdoctorname1").collapse('show');
+	      $(".detailsCity1").collapse('hide');
+	    });
+	    $(".detailsCity").click(function(){
+	      $(".detailsCity1").collapse('show');
+	      $(".detailsdoctorname1").collapse('hide');
+	    });
+	    $(".upcomming").click(function(){
+	      $(".upcomming1").collapse('show');
+	      $(".main").collapse('hide');
+	      $(".search").collapse('hide');
+	      $(".viewDoctorSchedule").collapse('hide');
+	      $(".detailsForContact").collapse('hide');
+	    });
+	});
+</script>
+
+  
+  
+</body>
+</html>

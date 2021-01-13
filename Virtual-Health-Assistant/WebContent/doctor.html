@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Doctor's Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap-4.5.0-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+  <style>
+    
+    .img{
+            
+            position: absolute;
+            top:10%;
+            right:0%;
+            display:flex;
+            
+            
+        }
+        .img img{
+  width:100vw;
+  height: 65vh;
+
+        }
+        
+        input[type=text],input[type=number],input[type=email],input[type=password]{
+            background-color:ghostwhite;
+            margin: 3px 0;
+        }
+        .a1:hover{
+          margin-top: -1.5%;
+          height: 33.2vh;
+          background-color: #0000ff;
+
+        }
+        .bac{
+        background-color:50%;
+        }
+  </style>
+  
+</head>
+<body>
+<form >
+    <nav class="navbar navbar-expand-md bg-info navbar-dark">
+  <img src="295067.svg" width="40" height="40">
+  <h4 id="docname"></h4>
+  <button class="navbar-toggler btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-white front1" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <div class="dropdown" style="margin-right: 3%;">
+      <a href="#" data-toggle="dropdown" class="nav-link text-white dropdown-toggle">Appointments</a>
+      <div class="dropdown-menu bg-success">
+        <a class="dropdown-item text-dark today1" href="#">Today Appointment</a>
+        <a class="dropdown-item text-dark future1" href="#">Future Appointment</a>
+      </div>
+      </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white history1" href="#">History</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">details</a>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+</form>
+<script>
+var b= localStorage.getItem("myvalue");
+//document.getElementById("docname").innerHTML=b;
+
+var xml1=new XMLHttpRequest();
+xml1.onreadystatechange=function(){
+	if(xml1.readyState==4){
+		var txt1=xml1.responseText;
+		document.getElementById("docname").innerHTML="Welcome Dr."+txt1;
+		
+	}
+};
+var parmas="email="+b+"&type=name";
+xml1.open("POST",action="appointment", true);
+xml1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xml1.send(parmas);
+
+
+var xml=new XMLHttpRequest();
+xml.onreadystatechange=function(){
+	if(xml.readyState==4){
+		var txt=xml.responseText;
+		document.getElementById("demo").innerHTML=txt;
+		
+	}
+};
+var today = new Date(); 
+var dd = today.getDate(); 
+var mm = today.getMonth() + 1; 
+if(mm<10){
+	mm="0"+mm;
+}
+var yy = today.getFullYear(); 
+var date=dd+"-"+mm+"-"+yy;
+var parmas="date="+date+"&email="+b+"&type=appointment";
+xml.open("POST",action="appointment", true);
+xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xml.send(parmas);
+
+var xml2=new XMLHttpRequest();
+xml2.onreadystatechange=function(){
+	if(xml2.readyState==4){
+		var txt2=xml2.responseText;
+		document.getElementById("futuredemo").innerHTML=txt2;
+		
+	}
+};
+var today = new Date(); 
+var dd = today.getDate(); 
+var mm = today.getMonth() + 1; 
+if(dd<10){
+	dd="0"+dd;
+}
+if(mm<10){
+	mm="0"+mm;
+}
+var yy = today.getFullYear(); 
+var date=yy+"-"+mm+"-"+dd;
+var parmas="date="+date+"&email="+b+"&type=futureappointment";
+xml2.open("POST",action="appointment", true);
+xml2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xml2.send(parmas);
+
+
+function bydatesearch(){
+	var s=document.getElementById("searchdate").value;
+	
+	
+	
+	var xml3=new XMLHttpRequest();
+	xml3.onreadystatechange=function(){
+		if(xml3.readyState==4){
+			var txt3=xml3.responseText;
+			document.getElementById("sortbydate").innerHTML=txt3;
+			
+		}
+	};
+	parmas="email="+b+"&date="+s+"&type=patientdetailsdate";
+	xml3.open("POST",action="appointment", true);
+	xml3.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xml3.send(parmas);
+
+}
+
+function bypatientidsearch(){
+	var s=document.getElementById("searchpatientid").value;
+	
+	document.getElementById("dfs").innerHTML=s;
+	
+	var xml4=new XMLHttpRequest();
+	xml4.onreadystatechange=function(){
+		if(xml4.readyState==4){
+			var txt4=xml4.responseText;
+			document.getElementById("sortbydate").innerHTML=txt4;
+			
+		}
+	};
+	parmas="email="+b+"&patientid="+s+"&type=patientdetailsbyid";
+	xml4.open("POST",action="appointment", true);
+	xml4.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xml4.send(parmas);
+
+}
+
+function byall(){
+	
+	
+	var xml5=new XMLHttpRequest();
+	xml5.onreadystatechange=function(){
+		if(xml5.readyState==4){
+			var txt5=xml5.responseText;
+			document.getElementById("sortbydate").innerHTML=txt5;
+			
+		}
+	};
+	parmas="email="+b+"&type=all";
+	xml5.open("POST",action="appointment", true);
+	xml5.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xml5.send(parmas);
+
+}
+
+function requestappointment(){
+	var xml6=new XMLHttpRequest();
+	
+	xml6.onreadystatechange=function(){
+		if(xml6.readyState==4){
+			var txt6=xml6.responseText;
+			document.getElementById("appreq").innerHTML=txt6;
+			
+		}
+	};
+	parmas="email="+b+"&type=requestappointment";
+	xml6.open("POST",action="appointment", true);
+	xml6.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xml6.send(parmas);
+}
+
+function totalappsearch(){
+	var date=document.getElementById("dateappsearch").value;
+	if(date==""){
+		alert("Please Enter the date to search total appointment!!!")
+	}
+	else{
+		var xml7=new XMLHttpRequest();
+		
+		xml7.onreadystatechange=function(){
+			if(xml7.readyState==4){
+				var txt7=xml7.responseText;
+				document.getElementById("totalapp").innerHTML=txt7;
+				$(document).ready(function(){
+	    			$(".totalapp").collapse('show');
+	    			
+	    		});
+			}
+		};
+		parmas="email="+b+"&date="+date+"&type=totalappsearch";
+		xml7.open("POST",action="appointment", true);
+		xml7.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml7.send(parmas);
+	}
+}
+
+function fixappointment(zz){
+	var cdate="fixappdate"+zz;
+	var ctime="fixapptime"+zz;
+	var cemail="fixappointment"+zz;
+	var ctokenno="token"+zz;
+	var confirm_date=document.getElementById(cdate).value;
+	var confirm_time=document.getElementById(ctime).value;
+	var confirm_email=document.getElementById(cemail).value;
+	var confirm_token=document.getElementById(ctokenno).value;
+	if(confirm_date=="" || confirm_time==""){
+		$('#myModal').modal("show");
+	}
+	else{
+		var xml8=new XMLHttpRequest();
+		xml8.onreadystatechange=function(){
+			if(xml8.readyState==4){
+				var txt8=xml8.responseText;
+				document.getElementById("appreq").innerHTML=txt8;
+				
+			}
+		};
+		parmas="email="+b+"&date="+confirm_date+"&token="+confirm_token+"&time="+confirm_time+"&pati_email="+confirm_email+"&type=fixdatetimeappointment";
+		xml8.open("POST",action="appointment", true);
+		xml8.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml8.send(parmas);
+	}
+}
+
+function finishappointment(zz){
+	
+	var up="uploadPrescriptionFile"+zz;
+	var file=document.getElementById(up).value;
+	
+	//file.setAttribute("type","file");
+	//var file="yes";
+	var upf="finishappointment"+zz;
+	var id=document.getElementById(upf).value;
+	var rr=id.split("&&");
+	
+	if(file==""){
+		alert("upload the prescription!!!");
+	}
+	else{
+		file=file.replace(/^.*[\\\/]/,'');
+		
+		var xml9=new XMLHttpRequest();
+		xml9.onreadystatechange=function(){
+			if(xml9.readyState==4){
+				var txt9=xml9.responseText;
+				document.getElementById("demo").innerHTML=txt9;
+				
+			}
+		};
+		var today = new Date(); 
+		var dd = today.getDate(); 
+		var mm = today.getMonth() + 1; 
+		if(dd<10){
+			dd="0"+dd;
+		}
+		if(mm<10){
+			mm="0"+mm;
+		}
+		var yy = today.getFullYear(); 
+		var date=yy+"-"+mm+"-"+dd;
+		alert(file);
+		//parmas="doc_email="+b+"&"+file+"&id="+rr[0]+"&dia="+rr[1]+"&date="+date+"&type=finishappointment";
+		parmas="Path="+file;
+		xml9.open("POST",action="appointment", true);
+		//xml9.setRequestHeader("Content-Type","text/plain;charset=UTF-8;multipart/mixed stream");
+	    //xml9.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	    xml9.setRequestHeader("Content-Type","multipart/form-data");
+		xml9.send(parmas);
+	}
+}
+
+function makeatest(){
+	var e=document.getElementById("laboname").value;
+	var xml10=new XMLHttpRequest();
+	
+	xml10.onreadystatechange=function(){
+		if(xml10.readyState==4){
+			var txt10=xml10.responseText;
+			document.getElementById("labname").innerHTML=txt10;
+			$(document).ready(function(){
+    			$(".labdetails").collapse('show');
+    			
+    		});
+		}
+	};
+	parmas="name="+e+"&type=labname";
+	xml10.open("POST",action="appointment", true);
+	xml10.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xml10.send(parmas);
+    
+}
+
+var lab_email;
+function labmakeappointment(zx){
+	var xc="labmakeappointment"+zx;
+	lab_email=document.getElementById(xc).value;
+	$(document).ready(function(){
+		$(".makelabtest1").collapse('show');
+		$(".labdetails").collapse('hide');
+		$(".labreq").collapse('hide');
+	});
+}
+
+function searchpatientname(){
+	var e=document.getElementById("patiID").value;
+	var xml11=new XMLHttpRequest();
+	
+	xml11.onreadystatechange=function(){
+		if(xml11.readyState==4){
+			var txt11=xml11.responseText;
+			
+			document.getElementById("patiname").value=txt11;
+			$(document).ready(function(){
+				$(".makelabtest1").collapse('show');
+				$(".labdetails").collapse('hide');
+				$(".labreq").collapse('hide');
+    		});
+		}
+	};
+	parmas="id="+e+"&type=patiname";
+	xml11.open("POST",action="appointment", true);
+	xml11.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xml11.send(parmas);
+}
+
+function maketesttolab(){
+	var pati_id=document.getElementById("patiID").value;
+	var pati_name=document.getElementById("patiname").value;
+	var test=document.getElementById("tesdet").value;
+	if(pati_id==""){
+		alert("Enter the Patient ID!!!");
+	}
+	else if(pati_name==""){
+		alert("Enter the Patient Name!!!");
+	}
+	else if(test==""){
+		alert("Enter the Test Details!!!");
+	}
+	else{
+		var xml12=new XMLHttpRequest();
+		
+		xml12.onreadystatechange=function(){
+			if(xml12.readyState==4){
+				var txt12=xml12.responseText;
+				alert("Your request is sent to LAB...");
+				document.getElementById("patiname").value=txt12;
+				$(document).ready(function(){
+					$(".makelabtest1").collapse('show');
+					$(".labdetails").collapse('hide');
+					$(".labreq").collapse('hide');
+	    		});
+			}
+		};
+		var today = new Date(); 
+		var dd = today.getDate(); 
+		var mm = today.getMonth() + 1; 
+		if(dd<10){
+			dd="0"+dd;
+		}
+		if(mm<10){
+			mm="0"+mm;
+		}
+		var yy = today.getFullYear(); 
+		var date=yy+"-"+mm+"-"+dd;
+		parmas="id="+pati_id+"&name="+pati_name+"&test="+test+"&date="+date+"&doc_email="+b+"&lab_email="+lab_email+"&type=lab";
+		xml12.open("POST",action="appointment", true);
+		xml12.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml12.send(parmas);
+	}
+}
+</script>
+<div class="errorrr ">
+	<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Alert</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          Can you give Appointment to patient as per their request
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Yes, Confirm</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="collapse show front">
+      <img src="doc.jpeg" class="img-fluid" style="height: 63vh; width: 100vw;">
+    </div>
+
+    <div class="container-fluid row collapse show front" style="margin-top: 0%;">
+      <div class="card a1 col-md-3 col-sm-6 col-xs-2" style="background-color: #66CCFF;margin-left: 0%;">
+        <div class="card-body text-dark"><h4 class="text-center">Sent Request for Lab test</h4></b>If want to take test to patient then sent details to lab and make appointment.<br><button class="btn-info labreq1" style="border-radius: 18px;margin-top: 1%;">More details</button></div>
+      </div>
+      <div class="card a1 col-md-3 col-sm-6 col-xs-2" style="background-color: #66CCFF;">
+        <div class="card-body text-dark today1"><h4 class="text-dark">Today's Appointment<br></h4>Today Appointments are there. To know more information click<br><br><br><button class="btn-info" style="border-radius: 18px;margin-top: 1%;">More details</button></div>
+      </div>
+      <div class="card a1 col-md-3 col-sm-6 col-xs-2" style="background-color: #66CCFF;">
+        <div class="card-body text-dark future1"><h4 class="text-dark">Future Appointment</h4>Want to see the Future Appointments click<br><br><br><button class="btn-info" style="border-radius: 18px;margin-top: 1%;">More details</button></div>
+      </div>
+      <div class="card a1 col-md-3 col-sm-6 col-xs-2" style="background-color: #66CCFF;">
+        <div class="card-body text-dark appreq1"><h4 class="text-dark">Request Appointments</h4>See the appointment request and confirm the appointment to patients.<br><br><button class="btn-info" style="border-radius: 18px;margin-top: 1%;" onclick="requestappointment()">See Requests</button></div>
+      </div>
+      
+    </div>
+
+	
+    <div class="container-fluid collapse today text-center table-responsive">
+    <br><h1 class="text-info">Today's Appointment details</h1><br>
+      <table class="table table-striped  table-hover text-center" style="border:1;width:100%;">
+		<thead>
+			<tr>
+			<th>
+				S.No
+			</th>
+			<th>
+				Time
+			</th>
+			<th>
+				Patient ID
+			</th>
+			<th>
+				Patient Name
+			</th>
+			<th>
+				Problem
+			</th>
+			
+			<th>
+				Patient Details
+			</th>
+			<th>
+				Upload Prescription as PDF
+			</th>
+			<th>
+				Finished
+			</th>
+			</tr>
+		</thead>
+		<tbody id="demo">
+	
+		</tbody>
+	
+	  </table>
+    </div>
+    
+    
+    <script type="text/javascript">
+    	function todayapp1(v){
+    		var id="todayapp"+v;
+    		var patient_id=document.getElementById(id).value;
+    		document.getElementById("dfs1").innerHTML=patient_id;
+    		
+    		var xml1=new XMLHttpRequest();
+			xml1.onreadystatechange=function(){
+				if(xml1.readyState==4){
+					var txt=xml1.responseText;
+					document.getElementById("todayappointmentres1").innerHTML=txt;
+					$(document).ready(function(){
+		    			$(".byID12").collapse('show');
+		    			$(".today").collapse('hide');
+		    			$(".future").collapse('hide');
+		    		});
+				}
+			};
+			parmas="patientid="+patient_id+"&type=patientdetails";
+			xml1.open("POST",action="appointment", true);
+			xml1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml1.send(parmas);
+    	}
+    	function bypatientidsearch11(i){
+    		var y="bydate"+i;
+    		var yes=document.getElementById(y).value;
+    		document.getElementById("dfs").innerHTML=yes;
+    		var xml1=new XMLHttpRequest();
+			xml1.onreadystatechange=function(){
+				if(xml1.readyState==4){
+					var txt=xml1.responseText;
+					document.getElementById("todayappointmentres").innerHTML=txt;
+					$(document).ready(function(){
+		    			$(".byID").collapse('show');
+		    			$(".bydate").collapse('hide');
+		    		});
+				}
+			};
+			parmas="patientid="+yes+"&type=patientdetails";
+			xml1.open("POST",action="appointment", true);
+			xml1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml1.send(parmas);
+    	}
+    </script>
+   
+
+    <div class="container collapse future text-center table-responsive">
+      <h1 class="text-info">Future Appointment details</h1><br>
+      <table class="table table-striped  table-hover text-center" style="border:1;width:90%;">
+		<thead>
+			<tr>
+			<th>
+				S.No
+			</th>
+			<th>
+				Date
+			</th>
+			<th>
+				Time
+			</th>
+			<th>
+				Patient ID
+			</th>
+			<th>
+				Patient Name
+			</th>
+			<th>
+				Problem
+			</th>
+			
+			<th>
+				Patient Details
+			</th>
+			
+			</tr>
+		</thead>
+		<tbody id="futuredemo">
+	
+		</tbody>
+	
+	  </table>
+    </div>
+
+
+	
+
+
+
+    <div class="container-fluid collapse history">
+    <div class="search1">
+      <div class="container-fluid text-center" style="background-color:#79ff4d; height:40vh;">
+      <br><h2 class="text-dark font-weight-bold font-italic">Find a History!</h2>
+      <p>Search your History's Here.</p>
+      <div class="collapse bydatesearch1">
+      <input type="date" id="searchdate" placeholder="Enter the Date"><button class="btn-success bydate1" onclick="bydatesearch()">Search</button><br><br>
+      </div><div class="collapse bypatientid1"><input type="text" id="searchpatientid" placeholder="Enter the PatientID"><button class="btn-success bydate1" onclick="bypatientidsearch()">Search</button><br><br>
+      </div><button class="btn-info bydate1" onclick="byall()" style="margin-right:1%;border-radius: 18px;" > All </button>
+      <button class="btn-info bydatesearch" style="margin-right:1%;border-radius: 18px;">By Date</button>
+      <button class="btn-info bypatientid" style="margin-right:1%;border-radius: 18px;">By PatientID</button>
+      </div><br><br>
+      
+      </div>
+      <div id="dddf"></div>
+      <div class="container text-center search collapse">
+      	<img src="historysearch.jpeg" class="img-fluid">
+      </div>
+      <div id="dfss"></div>
+      
+    </div>
+    
+    <script>
+    	
+    	
+    </script>
+    <script>
+    	function bydatesearch1(){
+    		var s=document.getElementById("searchdate").value;
+    		
+    		
+    		
+    		var xml1=new XMLHttpRequest();
+			xml1.onreadystatechange=function(){
+				if(xml1.readyState==4){
+					var txt=xml1.responseText;
+					document.getElementById("sortbydate").innerHTML=txt;
+					
+				}
+			};
+			parmas="date="+s+"&type=patientdetailsdate";
+			xml1.open("POST",action="appointment", true);
+			xml1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml1.send(parmas);
+
+    	}
+    </script>
+    
+    <div class="collapse bydate">
+        <div class="container">
+        <br>
+        <br><table class="table text-center" style="border:1;width:90%;">
+			<thead>
+			<tr>
+				<th>S.No</th>
+				<th>Date</th>
+				<th>Patient Name</th>
+				<th>Details</th>
+			</tr>
+			</thead>
+			<tbody id="sortbydate">
+	
+		</tbody>
+		</table>
+		
+        </div>
+        </div>
+   
+      
+      
+      <div class="collapse byID">
+      <div class="container">
+        <br><div class="row">
+        
+        <br><br><h3 style="margin-left:1.5%;">Patient Id:</h3>
+        <h3 id="dfs" class="text-info"></h3><br>
+        </div><div>
+        <h3 class="justify-content-end">Patient Name:</h3>
+        <br><table class="table text-center" style="border:1;width:90%;">
+			<thead>
+			<tr>
+				<th>S.No</th>
+				<th>Date</th>
+				<th>Doctor</th>
+				<th>Diagnosis</th>
+				<th>Prescription</th>
+				<th>Lab Test</th>
+				<th>Lab Report</th>
+			</tr>
+			</thead>
+			<tbody id="todayappointmentres">
+	
+		</tbody>
+		</table>
+        </div>
+        </div>
+      </div>
+      
+      <div class="collapse byID12">
+      <div class="container">
+        <br><div class="row">
+        
+        <br><br><h3 style="margin-left:1.5%;">Patient Id:</h3>
+        <h3 id="dfs1" class="text-info"></h3><br>
+        </div><div>
+        <h3 class="justify-content-end">Patient Name:</h3>
+        <br><table class="table text-center" style="border:1;width:90%;">
+			<thead>
+			<tr>
+				<th>S.No</th>
+				<th>Date</th>
+				<th>Doctor</th>
+				<th>Diagnosis</th>
+				<th>Prescription</th>
+				<th>Lab Test</th>
+				<th>Lab Report</th>
+			</tr>
+			</thead>
+			<tbody id="todayappointmentres1">
+	
+		</tbody>
+		</table>
+        </div>
+        </div>
+      </div>
+      
+      <div class="collapse report">
+        <img src="labreport.PNG">
+      </div>
+
+	<div class="container-fluid appreq collapse">
+		<h1 class="text-info text-center">Appointment Request</h1><br>
+		<label><h5>See the total number of appointments on search date:</h5></label>
+		<input type="date" id="dateappsearch">
+		<button class="btn btn-success" onclick="totalappsearch()">Search</button>
+		<div class="row totalapp collapse"><h5><pre>  Total Appointment on search date:</pre></h5><div class="col-md-3"><div class="card" id="totalapp"></div></div>
+		</div>
+		<div>
+			<table class="table table-bordered text-center">
+			<thead>
+				<tr>
+					<th>S.no</th>
+					<th>Patient Name</th>
+					<th>Patient ID</th>
+					<th>Treatment</th>
+					<th>Request Appointment Date & Time</th>
+					<th>Confirm Appointment Date & Time</th>
+					<th>Token No</th>
+					<th>Confirm the Appointment</th>
+					
+				</tr>
+			</thead>
+			<tbody id="appreq"></tbody>
+		
+		</table>
+		</div>
+	</div>
+    
+    
+    <div class="container collapse makelabtest1">
+    <div class="text-center"><h1>Sent lab test request</h1></div>
+    <div class="row">
+      <div class="col-md-2">
+    <label>Patient ID:</label></div><div class="col-md-3"><input type="text" id="patiID" onchange="searchpatientname()"></div><br>
+  </div>
+    <div class="row">
+      <div class="col-md-2">
+    <label>Patient Name:</label></div><div class="col-md-3"><input type="text" id="patiname"></div><br>
+  </div>
+  
+  <div class="row">
+      <div class="col-md-2">
+    <label>Test Name:</label></div><div class="col-md-3"><input type="text" id="tesdet"></div><br>
+  </div>
+     
+    <button class="btn btn-success" onclick="maketesttolab()"> submit</button>
+  </div>
+	 
+	 
+	 <div class="container-fluid  labreq collapse">
+	    <div class="search1">
+	      <div class="container-fluid text-center" style="background-color:#79ff4d; height:40vh;">
+	      <br><h2 class="text-dark font-weight-bold font-italic">Find a Lab & Make the Test!!</h2>
+	      <p>Search the Lab Name Here.</p>
+	      <div class=" ">
+	      <input type="text" id="laboname" placeholder="Enter the Lab Name" onkeyup="makeatest()"><button id="laboname" class="btn-success labdetails1" onkeyup="makeatest()">Search</button><br><br>
+	      </div><br><br>
+	      
+	      </div>
+	      
+	    </div>
+		 </div>
+	 
+	 <div class="container collapse labdetails text-center table-responsive">
+      
+      <table class="table table-striped  table-hover text-center" style="border:1;width:90%;">
+		<thead>
+			<tr>
+			<th>
+				S.No
+			</th>
+			<th>
+				Lab Name
+			</th>
+			<th>
+				Lab Address
+			</th>
+			<th>
+				Lab District
+			</th>
+			<th>
+				Lab Contact No
+			</th>
+			<th>
+				Make a Test
+			</th>
+			</tr>
+		</thead>
+		<tbody id="labname">
+	
+		</tbody>
+	
+	  </table>
+    </div>
+	 
+	<script>
+   $(document).ready(function(){
+      $(".front1").click(function(){
+        $(".today").collapse('hide');
+        $(".future").collapse('hide');
+        $(".history").collapse('hide');
+        $(".bydate").collapse('hide');
+        $(".byID").collapse('hide');
+        $(".report").collapse('hide');
+        $(".bydatesearch1").collapse('hide');
+        $(".bypatientid1").collapse('hide');
+        $(".front").collapse('show');
+        $(".byID12").collapse('hide');
+        $(".appreq").collapse('hide');
+        $(".labreq").collapse('hide');
+        $(".labdetails").collapse('hide');
+        }); 
+      $(".today1").click(function(){
+        $(".front").collapse('hide');
+        $(".future").collapse('hide');
+        $(".history").collapse('hide');
+        $(".bydate").collapse('hide');
+        $(".byID").collapse('hide');
+        $(".report").collapse('hide');
+        $(".bydatesearch1").collapse('hide');
+        $(".bypatientid1").collapse('hide');
+        $(".today").collapse('show');
+        $(".byID12").collapse('hide');
+        $(".appreq").collapse('hide');
+        $(".labreq").collapse('hide');
+        $(".labdetails").collapse('hide');
+        }); 
+      $(".labreq1").click(function(){
+          $(".front").collapse('hide');
+          $(".future").collapse('hide');
+          $(".history").collapse('hide');
+          $(".bydate").collapse('hide');
+          $(".byID").collapse('hide');
+          $(".report").collapse('hide');
+          $(".bydatesearch1").collapse('hide');
+          $(".bypatientid1").collapse('hide');
+          $(".today").collapse('hide');
+          $(".byID12").collapse('hide');
+          $(".appreq").collapse('hide');
+          $(".labreq").collapse('show');
+          $(".labdetails").collapse('hide');
+          }); 
+      $(".labdetails1").click(function(){
+          $(".front").collapse('hide');
+          $(".future").collapse('hide');
+          $(".history").collapse('hide');
+          $(".bydate").collapse('hide');
+          $(".byID").collapse('hide');
+          $(".report").collapse('hide');
+          $(".bydatesearch1").collapse('hide');
+          $(".bypatientid1").collapse('hide');
+          $(".today").collapse('hide');
+          $(".byID12").collapse('hide');
+          $(".appreq").collapse('hide');
+          $(".labreq").collapse('show');
+          $(".labdetails").collapse('show');
+          }); 
+      $(".future1").click(function(){
+        $(".front").collapse('hide');
+        $(".today").collapse('hide');
+        $(".history").collapse('hide');
+        $(".bydate").collapse('hide');
+        $(".byID").collapse('hide');
+        $(".report").collapse('hide');
+        $(".bydatesearch1").collapse('hide');
+        $(".bypatientid1").collapse('hide');
+        $(".future").collapse('show');
+        $(".byID12").collapse('hide');
+        $(".appreq").collapse('hide');
+        $(".labreq").collapse('hide');
+        $(".labdetails").collapse('hide');
+        }); 
+      $(".appreq1").click(function(){
+          $(".front").collapse('hide');
+          $(".future").collapse('hide');
+          $(".history").collapse('hide');
+          $(".bydate").collapse('hide');
+          $(".byID").collapse('hide');
+          $(".report").collapse('hide');
+          $(".bydatesearch1").collapse('hide');
+          $(".bypatientid1").collapse('hide');
+          $(".today").collapse('hide');
+          $(".byID12").collapse('hide');
+          $(".appreq").collapse('show');
+          $(".labreq").collapse('hide');
+          $(".labdetails").collapse('hide');
+          }); 
+      $(".history1").click(function(){
+        $(".front").collapse('hide');
+        $(".today").collapse('hide');
+        $(".future").collapse('hide');
+        $(".bydate").collapse('hide');
+        $(".byID").collapse('hide');
+        $(".report").collapse('hide');
+        $(".bydatesearch1").collapse('hide');
+        $(".search").collapse('show');
+        $(".bypatientid1").collapse('show');
+        $(".history").collapse('show');
+        $(".byID12").collapse('hide');
+        $(".appreq").collapse('hide');
+        $(".labreq").collapse('hide');
+        $(".labdetails").collapse('hide');
+        }); 
+      $(".bydate1").click(function(){
+        $(".front").collapse('hide');
+        $(".today").collapse('hide');
+        $(".future").collapse('hide');
+        $(".byID").collapse('hide');
+        $(".history").collapse('show');
+        $(".search").collapse('hide');
+        $(".report").collapse('hide');
+        $(".bydate").collapse('show');
+        $(".byID12").collapse('hide');
+        $(".appreq").collapse('hide');
+        $(".labreq").collapse('hide');
+        $(".labdetails").collapse('hide');
+        }); 
+      $(".byID1").click(function(){
+        $(".front").collapse('hide');
+        $(".today").collapse('hide');
+        $(".future").collapse('hide');
+        $(".bydate").collapse('hide');
+        $(".history").collapse('show');
+        $(".report").collapse('hide');
+        $(".byID12").collapse('hide');
+        $(".search").collapse('hide');
+        $(".byID").collapse('show');
+        $(".appreq").collapse('hide');
+        $(".labreq").collapse('hide');
+        $(".labdetails").collapse('hide');
+        }); 
+      $(".report1").click(function(){
+        $(".front").collapse('hide');
+        $(".today").collapse('hide');
+        $(".future").collapse('hide');
+        $(".bydate").collapse('hide');
+        $(".history").collapse('hide');
+        $(".byID").collapse('hide');
+        $(".bydatesearch1").collapse('hide');
+        $(".bypatientid1").collapse('hide');
+        $(".report").collapse('show');
+        $(".byID12").collapse('hide');
+        $(".appreq").collapse('hide');
+        $(".labreq").collapse('hide');
+        $(".labdetails").collapse('hide');
+        });
+      $(".byID111").click(function(){
+          $(".front").collapse('hide');
+          $(".today").collapse('hide');
+          $(".future").collapse('hide');
+          $(".bydate").collapse('hide');
+          $(".history").collapse('hide');
+          $(".byID").collapse('hide');
+          $(".bydatesearch1").collapse('hide');
+          $(".bypatientid1").collapse('hide');
+          $(".report").collapse('hide');
+          $(".labreq").collapse('hide');
+          $(".appreq").collapse('hide');
+          $(".byID12").collapse('show');
+          $(".labdetails").collapse('hide');
+          });
+      $(".bydatesearch").click(function(){
+          $(".front").collapse('hide');
+          $(".today").collapse('hide');
+          $(".future").collapse('hide');
+          $(".bydate").collapse('hide');
+          $(".history").collapse('show');
+          $(".byID").collapse('hide');
+          $(".report").collapse('hide');
+          $(".bypatientid1").collapse('hide');
+          $(".appreq").collapse('hide');
+          $(".bydatesearch1").collapse('show');
+          $(".labreq").collapse('hide');
+          $(".labdetails").collapse('hide');
+          });
+      $(".bypatientid").click(function(){
+          $(".front").collapse('hide');
+          $(".today").collapse('hide');
+          $(".future").collapse('hide');
+          $(".bydate").collapse('hide');
+          $(".history").collapse('show');
+          $(".byID").collapse('hide');
+          $(".report").collapse('hide');
+          $(".bydatesearch1").collapse('hide');
+          $(".bypatientid1").collapse('show');
+          $(".appreq").collapse('hide');
+          $(".labreq").collapse('hide');
+          $(".labdetails").collapse('hide');
+          });      
+      
+    });
+  </script>
+
+</body>
+</html>

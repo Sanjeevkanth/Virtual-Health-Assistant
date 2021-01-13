@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap-4.5.0-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+  <style>
+        .img{
+            
+            position: absolute;
+            top:0%;
+            right:97%;
+            display:flex;
+            
+            
+        }
+        .img img{
+  			width:50vw;
+  			height: 89vh;
+
+        }
+        input[type=text],input[type=number],input[type=email],input[type=password]{
+            background-color:ghostwhite;
+            margin: 3px 0;
+        }
+        
+    </style>
+    <script type="text/javascript">
+		function doclog(type){
+		var email=document.getElementById("demail").value;
+		var pass=document.getElementById("dpassword1").value;
+		
+		if(email==""){
+			alert("Enter the Email!!!")
+		}
+		else if(!email.endsWith("@gmail.com")){
+			alert("Enter the correct Email ID!!!");
+		}
+		else if(pass==""){
+			alert("Enter the Password!!!");
+		}
+		else{
+		var xml=new XMLHttpRequest();
+		xml.onreadystatechange=function(){
+			if(xml.readyState==4){
+				var txt=xml.responseText;
+				if(txt=="success"){
+					localStorage.setItem("myvalue",document.getElementById("demail").value);
+					//window.location.href="doctor.html";
+					window.open("doctor.html","_self");
+			    	document.getElementById(compiler).style.display="block";
+				}
+				else if(txt=="verification"){
+					localStorage.setItem("myvalue",document.getElementById("demail").value);
+					window.open("doc-verification.html","_self");
+			    	document.getElementById(compiler).style.display="block";
+				}
+				else{
+					document.getElementById("demo").innerHTML=txt;
+				}
+			}
+		};
+		var parmas="demail="+email+"&dpassword1="+pass+"&dsubmit="+type;
+		xml.open("POST",action="login-register", true);
+		xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xml.send(parmas);
+		}
+		}
+		
+		function hoslog(type){
+			var email=document.getElementById("hemail").value;
+			var pass=document.getElementById("hpassword1").value;
+			
+			if(email==""){
+				alert("Enter the Email!!!")
+			}
+			else if(!email.endsWith("@gmail.com")){
+				alert("Enter the correct Email ID!!!");
+			}
+			else if(pass==""){
+				alert("Enter the Password!!!");
+			}
+			else{
+			var xml=new XMLHttpRequest();
+			xml.onreadystatechange=function(){
+				if(xml.readyState==4){
+					var txt=xml.responseText;
+					if(txt=="success"){
+						localStorage.setItem("hospitalvalue",document.getElementById("hemail").value);
+						//window.location.href="doctor.html";
+						window.open("hospital.html","_self");
+				    	document.getElementById(compiler).style.display="block";
+					}
+					else if(txt=="verification"){
+						localStorage.setItem("hospitalvalue",document.getElementById("hemail").value);
+						window.open("doc-verification.html","_self");
+				    	document.getElementById(compiler).style.display="block";
+					}
+					else{
+						document.getElementById("hosdemo").innerHTML=txt;
+					}
+				}
+			};
+			var parmas="demail="+email+"&dpassword1="+pass+"&dsubmit="+type;
+			xml.open("POST",action="login-register", true);
+			xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml.send(parmas);
+			}
+			}
+		
+		function hosreg(type){
+			var pwd1=document.getElementById("hpassword11").value;
+			var pwd2=document.getElementById("hapassword").value;
+			var name=document.getElementById("hname1").value;
+			var email=document.getElementById("hemail1").value;
+			var contact=document.getElementById("hcontactid").value;
+			var district=document.getElementById("hdistrict1").value;
+			var openhrs=document.getElementById("hopenhrs1").value;
+			var hosadd=document.getElementById("hosaddress").value;
+			if(name==""){
+				alert("Enter the Name!!!");
+			}
+			else if(email==""){
+				alert("Enter the Email!!!");
+			}
+			else if(!email.endsWith("@gmail.com")){
+				alert("Enter the Correct Email ID!!!");
+			}
+			else if(contact==""){
+				alert("Enter the Contact Number!!!");
+			}
+			else if(hosadd==""){
+				alert("Enter the Hospital Address!!!");
+			}
+			else if(district==""){
+				alert("Choose the Hospital District!!!");
+			}
+			else if(openhrs==""){
+				alert("Enter the Opening Hours!!!");
+			}
+			else if(pwd1==""){
+				alert("Enter the Password!!!");
+			}
+			else if(pwd2==""){
+				alert("Enter the Confirm PAssword!!!");
+			}
+			else if(pwd1!=pwd2){
+				alert("Invalid Password or Confirm Password!!!");
+			}
+			else{
+			var xml=new XMLHttpRequest();
+			xml.onreadystatechange=function(){
+				if(xml.readyState==4){
+					var txt=xml.responseText;
+					if(txt=="success"){
+						localStorage.setItem("myvalue",document.getElementById("demail1").value);
+						//window.location.href="doctor.html";
+						window.open("doc-verification.html","_self");
+				    	document.getElementById(compiler).style.display="block";
+					}
+					else{
+						alert(txt);
+					}
+					
+				}
+			};
+			var parmas="dname="+name+"&demail="+email+"&dpassword1="+pwd1+"&dsubmit="+type+"&dcontact="+contact+"&ddistrict="+district+"&openhrs="+openhrs+"&hosadd="+hosadd;
+			xml.open("POST",action="login-register", true);
+			xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml.send(parmas);
+			}
+		}
+		var id;
+		function hosname(){
+			id=document.getElementById("dhospitalid").value;
+			var xml=new XMLHttpRequest();
+			xml.onreadystatechange=function(){
+				if(xml.readyState==4){
+					var txt=xml.responseText;
+					if(txt==""){
+						alert("Please Enter the Correct Hospital ID !!!!!");
+					}
+					else{
+						var res=txt.split("&&");
+						document.getElementById("dhospital").value=res[0];
+						document.getElementById("hosadd").value=res[1];
+					}
+				}
+			};
+			var parmas="id="+id+"&type=hosnamereg";
+			xml.open("POST",action="appointment", true);
+			xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml.send(parmas);
+		}
+		function docreg(type){
+			var pwd1=document.getElementById("dpassword11").value;
+			var pwd2=document.getElementById("dapassword").value;
+			var name=document.getElementById("dname1").value;
+			var email=document.getElementById("demail1").value;
+			var contact=document.getElementById("dcontactid").value;
+			var hospital=document.getElementById("dhospital").value;
+			var dept=document.getElementById("ddepartment").value;
+			var district=document.getElementById("ddistrict1").value;
+			var openhrs=document.getElementById("openhrs1").value;
+			var hosadd=document.getElementById("hosadd").value;
+			var hosID=document.getElementById("dhospitalid").value;
+			if(name==""){
+				alert("Enter the Name!!!");
+			}
+			else if(email==""){
+				alert("Enter the Email!!!");
+			}
+			else if(!email.endsWith("@gmail.com")){
+				alert("Enter the Correct Email ID!!!");
+			}
+			else if(contact==""){
+				alert("Enter the Contact Number!!!");
+			}
+			else if(hospital==""){
+				alert("Enter the Hospital Name!!!");
+			}
+			else if(hosadd==""){
+				alert("Enter the Hospital Address!!!");
+			}
+			else if(dept==""){
+				alert("Choose the Department!!!");
+			}
+			else if(district==""){
+				alert("Choose the Hospital District!!!");
+			}
+			else if(openhrs==""){
+				alert("Enter the Opening Hours!!!");
+			}
+			else if(pwd1==""){
+				alert("Enter the Password!!!");
+			}
+			else if(pwd2==""){
+				alert("Enter the Confirm PAssword!!!");
+			}
+			else if(pwd1!=pwd2){
+				alert("Invalid Password or Confirm Password!!!");
+			}
+			else if(hosID=""){
+				alert("Enter the Hospital ID!!!");
+			}
+			else{
+			var xml=new XMLHttpRequest();
+			xml.onreadystatechange=function(){
+				if(xml.readyState==4){
+					var txt=xml.responseText;
+					if(txt=="success"){
+						localStorage.setItem("myvalue",document.getElementById("demail1").value);
+						//window.location.href="doctor.html";
+						window.open("doc-verification.html","_self");
+				    	document.getElementById(compiler).style.display="block";
+					}
+					else{
+						alert(txt);
+					}
+					
+				}
+			};
+			
+			var parmas="dname="+name+"&hosid="+id+"&demail="+email+"&dpassword1="+pwd1+"&dsubmit="+type+"&dcontact="+contact+"&dhospital="+hospital+"&ddept="+dept+"&ddistrict="+district+"&openhrs="+openhrs+"&hosadd="+hosadd;
+			xml.open("POST",action="login-register", true);
+			xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xml.send(parmas);
+			}
+		}
+	</script>
+  
+</head>
+<body>
+  
+  <form>
+    <nav class="navbar navbar-expand-sm bg-info justify-content-end" style="height: 48px;">
+      <a href="#" class="text-white login1">Home</a>
+      <a href="#" class="text-white about1" style="margin-left: 2%;">About</a>
+      <a href="#" class="text-white admin1" style="margin-left: 2%;">Admin Panel</a>
+    </nav>
+
+    <div class="container" style=" margin-top:0%;" >
+      <div class="row">
+        <div class="col-md-5 offset-md-6">
+          <div class="collapse show login">
+          <p class="" style="margin-top: 40%;">
+            we are here for you
+            <h1 class="font-weight-bold font-italic";>BEST CARE & <br> 
+            BETTER DOCTOR</h1>
+            In healthcare sector, service excellence is the facility of the of the hospital as healthcare service provider to consistently.<br>
+            <a href="#" class="btn btn-success choose1" style="margin-top: 2%;">Login</a>
+          </p>
+          </div>
+
+          <div class="collapse text-center choose"  style="margin-left: 3%">
+                <h1 class="text-dark" style="margin-top: 5%;">Choose your Login type</h1><br>
+
+                <a href="#">
+                  <img src="https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg" class="rounded-circle doctor1" alt="Cinque Terre" width="100" height="100">
+                  <div class="caption">
+                    <h5>Doctor's Login</h5>
+                  </div>
+                </a>
+                <a href="#">
+                  <img src="https://image.flaticon.com/icons/png/128/163/163801.png" alt="Cinque Terre" width="100" height="100" class="rounded-circle patient1">
+                  <div class="caption">
+                    <h5>Patient's Login</h5>
+                  </div>
+                </a>
+                <a data-toggle="collapse" href="#lab">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Generic_Laboratory_Logo.png" alt="Cinque Terre" width="100" height="100" class="rounded-circle lab1">
+                  <div class="caption">
+                    <h5>Laboratory Login</h5>
+                  </div>
+                </a>
+                <a href="#">
+                  <img src="hospital.jpg" alt="Cinque Terre" width="100" height="100" class="rounded-circle hospital1">
+                  <div class="caption">
+                    <h5>Hospital (or) Clinic Login</h5>
+                  </div>
+                </a>
+          </div>
+			
+
+			<div class="collapse admin" style="margin-top: 20%;margin-left: 10%;">
+            <h1 class="text-center" style="margin-bottom: 10%;">Admin Login Panel</h1>
+            <h3 class="text-center text-dark">SIGN-UP
+            </h3>
+            <div class="bg-danger text-center text-white" id="adminnotsuccess"></div>
+            <i class="fas fa-envelope"></i>
+                <label for="ademail">Email</label>
+                  <input type="email" class="form-control" id="ademail" name="ademail" placeholder="sample123@gmail.com">
+					
+                <i class="fas fa-lock"></i>
+                <label for="adpassword">Password</label>
+                  <input type="password" class="form-control" id="adpassword" name="adpassword1" placeholder="Password">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox">Remember me
+              </label>
+            </div>
+            <a href="#" class="float-right admin-reg1" style="margin-top: -7%;">Create New Account</a>
+            <div class="form-group text-center" style="margin:20px 0;">
+              <button type="submit" class="btn btn-success" name="adsubmit" value="adlogin" onclick="adlogin('adminlogin')">Login</button>
+            
+            </div>
+          </div>
+          <script>
+          	function adlogin(type){
+          		var email=document.getElementById("ademail").value;
+          		var pass=document.getElementById("adpassword").value;
+          		if(email==""){
+          			alert("Please Enter the Name!!!");
+          		}
+          		else if(pass==""){
+          			alert("Please Enter your Password!!!");
+          		}
+          		else{
+          			var xml=new XMLHttpRequest();
+          			xml.onreadystatechange=function(){
+          				if(xml.readyState==4){
+          					var txt1=xml.responseText;
+          					if(txt1=="success"){
+          						
+          						window.open("admin.html","_self");
+          				    	document.getElementById(compiler).style.display="block";
+          					}
+          					else{
+          						document.getElementById("adminnotsuccess").innerHTML=txt1;
+          					}
+          				}
+          			};
+          			var parmas="ademail="+email+"&adpassword="+pass+"&submit="+type;
+          			xml.open("POST",action="admin_login_register", true);
+          			xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          			xml.send(parmas);
+          		}
+          	}
+          	
+          	function adreg(type){
+          		var name=document.getElementById("adname").value;
+          		var email=document.getElementById("ademail1").value;
+          		var pass=document.getElementById("adpassword2").value;
+          		var code=document.getElementById("admincode").value;
+          		if(email==""){
+          			alert("Please Enter the Name!!!");
+          		}
+          		else if(pass==""){
+          			alert("Please Enter your Password!!!");
+          		}
+          		else if(name==""){
+          			alert("Please Enter your Name!!!");
+          		}
+          		else{
+          			if(code=="66"){
+          			var xml=new XMLHttpRequest();
+          			xml.onreadystatechange=function(){
+          				if(xml.readyState==4){
+          					var txt=xml.responseText;
+          					if(txt=="success"){
+          						
+          						window.open("admin.html","_self");
+          				    	document.getElementById(compiler).style.display="block";
+          					}
+          					else{
+          						document.getElementById("adminnotsuccess").innerHTML=txt;
+          					}
+          				}
+          			};
+          			var parmas="adname="+name+"&ademail="+email+"&adpassword="+pass+"&submit="+type;
+          			xml.open("POST",action="admin_login_register", true);
+          			xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          			xml.send(parmas);
+          			}
+          			else{
+          				alert("Admin code is invalid!!!");
+          			}
+          		}
+          	}
+          </script>
+          
+          
+          <div class="collapse admin-reg" style="margin-left: 10%;">
+            <h1 class="text-center" style="margin-bottom: 8%;">Admin Register Panel</h1>
+            <h3 class="text-center text-dark">SIGN-UP
+            </h3>
+            <i class="fas fa-user"></i>
+                <label for="dName">Name</label>
+                  <input type="text" class="form-control" id="adname" name="adname" placeholder="Enter Name">
+            <i class="fas fa-envelope"></i>
+                <label for="ademail">Email</label>
+                  <input type="email" class="form-control" id="ademail1" name="ademail1" placeholder="sample123@gmail.com">
+
+                <i class="fas fa-lock"></i>
+                <label for="adpassword">Password</label>
+                  <input type="password" class="form-control" id="adpassword2" name="adpassword3" placeholder="Password">
+            
+            <i class="fas fa-lock"></i>
+                <label for="cadpassword">Confirm Password</label>
+                  <input type="password" class="form-control" id="cadpassword" name="cadpassword2" placeholder="Confirm password">
+            
+            <i class="fas fa-code"></i>
+            <label for="admincode">Admin Code</label>
+            <input type="password" class="form-control" id="admincode" name="admincode1" placeholder="Enter Admin Code">
+            
+            <div class="form-group text-center" style="margin:20px 0;">
+              <button type="submit" class="btn btn-success" name="submit" value="adreg" onclick="adreg('adreg')">Register</button>
+            </div>
+            <a href="#" class="text-dark admin1"><i class='fas fa-backward' style='font-size:15px;color:black; margin-right: 1px;'></i><u>Back</u></a>
+          </div>
+		
+          
+
+
+          <div class="collapse lab" style="margin-top: 20%;margin-left: 10%;">
+            <h1 class="text-center" style="margin-bottom: 10%;">Welcome Laboratary</h1>
+            <h3 class="text-center text-dark">SIGN-UP
+            </h3>
+            <div class="bg-danger text-center text-white" id="labloginInvalid"></div>
+            <i class="fas fa-envelope"></i>
+                <label for="lemail">Email</label>
+                  <input type="email" class="form-control" id="dlemail" name="dlemail" placeholder="sample123@gmail.com">
+
+                <i class="fas fa-lock"></i>
+                <label for="lpassword">Password</label>
+                  <input type="password" class="form-control" id="dlpassword" name="dlpassword1" placeholder="Password">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox">Remember me
+              </label>
+            </div>
+            <a href="#" class="float-right lab-reg1" style="margin-top: -7%;">Create New Account</a>
+            <div class="form-group text-center" style="margin:20px 0;">
+              <button type="submit" class="btn btn-success" name="dsubmit" value="dlogin" onclick="lablogin('login')">Login</button>
+            
+            </div>
+            <a href="#" class="text-dark choose1"><i class='fas fa-backward' style='font-size:15px;color:black; margin-right: 1px;'></i><u>Back</u></a>
+          </div>
+          
+          <script>
+          	function lablogin(type){
+          		var email=document.getElementById("dlemail").value;
+          		var pass=document.getElementById("dlpassword").value;
+          		if(email==""){
+          			alert("Please Enter the Name!!!");
+          		}
+          		else if(pass==""){
+          			alert("Please Enter your Password!!!");
+          		}
+          		else{
+          			var xml=new XMLHttpRequest();
+          			xml.onreadystatechange=function(){
+          				if(xml.readyState==4){
+          					var txt1=xml.responseText;
+          					if(txt1=="success"){
+          						localStorage.setItem("mylabemail",email);
+          						//window.location.href="doctor.html";
+          						window.open("lab.html","_self");
+          				    	document.getElementById(compiler).style.display="block";
+          					}
+          					else if(txt1=="verification"){
+          						localStorage.setItem("myvalue",email);
+          						window.open("doc-verification.html","_self");
+          				    	document.getElementById(compiler).style.display="block";
+          					}
+          					else{
+          						document.getElementById("labloginInvalid").innerHTML=txt1;
+          					}
+          				}
+          			};
+          			var parmas="email="+email+"&password="+pass+"&type="+type;
+          			xml.open("POST",action="lab_login_register", true);
+          			xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          			xml.send(parmas);
+          		}
+          	}
+          	</script>
+
+
+          <div class="collapse doctor" style="margin-top: 18%;margin-left: 10%;">
+            <h1 class="text-center" style="margin-bottom: 10%;">Welcome Doctor</h1>
+            <h3 class="text-center text-dark">SIGN-UP
+            </h3>
+            <div class="bg-danger text-center text-white" id="demo"></div>
+            <i class="fas fa-envelope"></i>
+                <label for="email">Email</label>
+                  <input type="email" class="form-control" id="demail" name="demail" placeholder="sample123@gmail.com" required>
+
+                <i class="fas fa-lock"></i>
+                <label for="password">Password</label>
+                  <input type="password" class="form-control" id="dpassword1" name="dpassword1" placeholder="Password" required="">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox">Remember me
+              </label>
+            </div>
+            <a href="#" class="float-right doc-reg1" style="margin-top: -7%;">Create New Account</a>
+            <div class="form-group text-center" style="margin:20px 0;">
+            <button type="button" class="btn btn-success text-center" onclick="doclog('dlogin')" >submit</button>
+			</div>
+            <a href="#" class="text-dark choose1"><i class='fas fa-backward' style='font-size:15px;color:black; margin-right: 1px;'></i><u>Back</u></a>
+          </div>
+          
+
+          <div class="collapse doc-reg" style="margin-left: 10%;">  
+            <h3 class="text-center text-dark">REGISTER
+            </h3>
+            
+            <i class="fas fa-user"></i>
+                <label for="dName">Doctor Name</label>
+                  <input type="text" class="form-control" id="dname1" name="dname1" placeholder="Enter Name">
+
+                <i class="fas fa-envelope"></i>
+                <label for="demail">Email</label>
+                  <input type="email" class="form-control" id="demail1" name="demail1" placeholder="sample123@gmail.com">
+
+                  <i class="fas fa-phone"></i>
+                <label for="dContact">Contact No</label>
+                  <input type="Number" class="form-control" id="dcontactid" name="dcontact" placeholder="Contact no">
+				
+				<i class="fas fa-hospital-symbol"></i>
+                  <label for="dhospital">Hospital ID</label>
+                  <input type="text" class="form-control" id="dhospitalid" name="dhospitalid" placeholder="Hospital ID" onchange="hosname()">
+				
+				
+                  <i class="fas fa-hospital-symbol"></i>
+                  <label for="dhospital">Hospital Name</label>
+                  <input type="text" class="form-control" id="dhospital" name="dhospital" placeholder="Hospital Name">
+					
+					<label for="hosadd">Hospital Address</label>
+                  <textarea class="form-control" rows="5" id="hosadd" name="hosadd1"></textarea>
+					
+					<i class="fas fa-hospital-symbol"></i>
+                  <label for="ddepartment">Department Name</label>
+                  <input type="text" class="form-control" id="ddepartment" name="ddepartment" placeholder="Department">
+					
+                  <i class="fas fa-city"></i>
+                  <label for="dcity">District</label>
+                  <select class="form-control" id="ddistrict1" name="ddistrict1">
+                    <option>None</option>
+                    <option>Ariyalur</option>
+                    <option>Chengalpattu</option>
+                    <option>Chennai</option>
+                    <option>Coimbatore</option>
+                    <option>Cuddalore</option>
+                    <option>Dharmapuri</option>
+                    <option>Dindigul</option>
+                    <option>Erode</option>
+                    <option>Kallakurichi</option>
+                    <option>Kanchipuram</option>
+                    <option>Kanyakumari</option>
+                    <option>Karur</option>
+                    <option>Krishnagiri</option>
+                    <option>Madurai</option>
+                    <option>Mayiladuthurai</option>
+                    <option>Nagapattinam</option>
+                    <option>Namakkal</option>
+                    <option>Nilgiris</option>
+                    <option>Perambalur</option>
+                    <option>Pudukkottai</option>
+                    <option>Ramanathapuram</option>
+                    <option>Ranipet</option>
+                    <option>Salem</option>
+                    <option>Sivagangai</option>
+                    <option>Tenkasi</option>
+                    <option>Thanjavur</option>
+                    <option>Theni</option>
+                    <option>Thoothukudi</option>
+                    <option>Tiruchirappalli</option>
+                    <option>Tirunelveli</option>
+                    <option>Tirupattur</option>
+                    <option>Tiruppur</option>
+                    <option>Tiruvallur</option>
+                    <option>Tiruvannamalai</option>
+                    <option>Tiruvarur</option>
+                    <option>Vellore</option>
+                    <option>Viluppuram</option>
+                    <option>Virudhunagar</option>
+                  </select>
+                  
+                  <label for="openhrs">Opening hours</label>
+                  <textarea class="form-control" rows="5" id="openhrs1" name="openhrs"></textarea>
+
+                  <i class="fas fa-lock"></i>
+                <label for="dpassword">Password</label>
+                  <input type="password" class="form-control" id="dpassword11" name="dpassword11" placeholder="Password">
+
+                  <i class="fas fa-lock"></i>
+                <label for="aContact">Confirm Password</label>
+                  <input type="password" class="form-control" id="dapassword" name="dapassword2" placeholder="Confirm password">
+                  
+                  <div class="bg-danger text-center text-white" id="invalidpwd"></div>
+
+                  <a href="#" class="float-right doctor1" >Already have account?</a><br>
+            
+            <div class="form-group text-center" style="margin:20px 0;">
+            <button type="button" class="btn btn-success text-center" onclick="docreg('dregister')" >Register Now</button>              
+            </div>
+          </div>
+
+<script>
+
+</script>
+
+
+
+
+			<div class="collapse patient" style="margin-top: 20%;margin-left: 10%;">
+            <h1 class="text-center" style="margin-bottom: 10%;">Welcome</h1>
+            <h3 class="text-center text-dark">SIGN-UP
+            </h3>
+            <div class="bg-danger text-center text-white" id="pdemo"></div>
+            <i class="fas fa-user"></i>
+                <label for="pName" style="margin-top: 2%;">EmailID</label>
+                  <input type="email" class="form-control" id="pemail" name="pemail" placeholder="Enter User-ID">
+
+                <i class="fas fa-lock"></i>
+                <label for="ppassword">Password</label>
+                  <input type="password" class="form-control" id="ppassword" name="ppassword1" placeholder="Password">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox">Remember me
+              </label>
+            </div>
+            <a href="#" class="float-right pati-reg1" style="margin-top: -7%;">Create New Account</a>
+            <div class="form-group text-center" style="margin:20px 0;">
+              <button type="submit" class="btn btn-success" onclick="patilog('plogin')">Login</button>
+            
+            </div><br>
+            <a href="#" class="text-dark choose1"><i class='fas fa-backward' style='font-size:15px;color:black; margin-right: 1px;'></i><u>Back</u></a>
+          </div>
+          
+          <script type="text/javascript">
+          function patilog(type){
+        	var email=document.getElementById("pemail").value;
+        	var pass=document.getElementById("ppassword").value;
+        	if(email==""){
+        		alert("Enter the Email ID!!!");
+        	}
+        	else if(!email.endsWith("@gmail.com")){
+        		alert("Enter the valid Email address!!!");
+        	}
+        	else if(pass==""){
+        		alert("Enter the Password!!!");
+        	}
+        	else{
+	      		var xml=new XMLHttpRequest();
+	      		xml.onreadystatechange=function(){
+	      			if(xml.readyState==4){
+	      				var txt=xml.responseText;
+	      				if(txt=="success"){
+	      					localStorage.setItem("mypatientemail",document.getElementById("pemail").value);
+	      					window.open("patient.html","_self");
+	      			    	document.getElementById(compiler).style.display="block";
+	      				}
+	      				else{
+	      					document.getElementById("pdemo").innerHTML=txt;
+	      				}
+	      			}
+	      		};
+	      		var parmas="pemail="+email+"&ppassword="+pass+"&psubmit="+type;
+	      		xml.open("POST",action="patient_login_register", true);
+	      		xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	      		xml.send(parmas);
+      		}
+          }
+          </script>
+
+          <div class="collapse pati-reg" style="margin-left: 10%;">  
+                        <h3 class="text-center text-dark">REGISTER
+                        </h3>
+                        <i class="fas fa-user"></i>
+                            <label for="pName">Patient Name</label>
+                              <input type="text" class="form-control" id="pname" name="pname" placeholder="Enter Name" required>
+
+                            <i class="fas fa-envelope"></i>
+                            <label for="pemail">Email</label>
+                              <input type="email" class="form-control" id="pemail1" name="pemail" placeholder="sample123@gmail.com" required>
+
+                              <i class="fas fa-phone"></i>
+                            <label for="pContact">Contact No</label>
+                              <input type="Number" class="form-control" id="pcontactid" name="pcontact" placeholder="Contact no" required>
+
+                              <i class="fa fa-tint"></i>
+                              <label for="pbloodgroup">Bloodgroup</label>
+                              <select class="form-control" id="pbloodgroup" name="pbloodgroup" placeholder="bloodgroup">
+                                <option>None</option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                              </select>
+                              
+                              <i class="fa fa-tint"></i>
+                              <label for="pbloodgroup">Gender</label>
+                              <select class="form-control" id="pgender" name="pgender" placeholder="Gender">
+                                <option>None</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                              </select>
+                              
+                              <i class="far fa-address-card"></i>
+                            <label for="pdob">DOB</label><br>
+                              <input type="date" id="pdob" placeholder="Enter the DOB"><br>
+
+                              <i class="far fa-address-card"></i>
+                            <label for="paddress">Address</label>
+                              <input type="text" class="form-control" id="paddress" name="paddress" placeholder="Address" required >
+
+                              <i class="fas fa-city"></i>
+                              <label for="pcity">District</label>
+                              <select class="form-control" id="pdistrict" name="pdistrict">
+                                <option>None</option>
+                                <option>Ariyalur</option>
+                                <option>Chengalpattu</option>
+                                <option>Chennai</option>
+                                <option>Coimbatore</option>
+                                <option>Cuddalore</option>
+                                <option>Dharmapuri</option>
+                                <option>Dindigul</option>
+                                <option>Erode</option>
+                                <option>Kallakurichi</option>
+                                <option>Kanchipuram</option>
+                                <option>Kanyakumari</option>
+                                <option>Karur</option>
+                                <option>Krishnagiri</option>
+                                <option>Madurai</option>
+                                <option>Mayiladuthurai</option>
+                                <option>Nagapattinam</option>
+                                <option>Namakkal</option>
+                                <option>Nilgiris</option>
+                                <option>Perambalur</option>
+                                <option>Pudukkottai</option>
+                                <option>Ramanathapuram</option>
+                                <option>Ranipet</option>
+                                <option>Salem</option>
+                                <option>Sivagangai</option>
+                                <option>Tenkasi</option>
+                                <option>Thanjavur</option>
+                                <option>Theni</option>
+                                <option>Thoothukudi</option>
+                                <option>Tiruchirappalli</option>
+                                <option>Tirunelveli</option>
+                                <option>Tirupattur</option>
+                                <option>Tiruppur</option>
+                                <option>Tiruvallur</option>
+                                <option>Tiruvannamalai</option>
+                                <option>Tiruvarur</option>
+                                <option>Vellore</option>
+                                <option>Viluppuram</option>
+                                <option>Virudhunagar</option>
+                              </select>
+
+                              <i class="fas fa-lock"></i>
+                            <label for="ppassword">Password</label>
+                              <input type="password" class="form-control" id="ppassword1" name="ppassword1" placeholder="Password" required>
+
+                              <i class="fas fa-lock"></i>
+                            <label for="papassword">Confirm Password</label>
+                              <input type="password" class="form-control" id="papassword" name="ppassword2" placeholder="Confirm password">
+
+                              <a href="#" class="float-right patient1" >Already have account?</a><br>
+                        
+                    <div class="form-group text-center" style="margin:20px 0;">
+                      <button type="submit" class="btn btn-success" onclick="patireg('pregister')">Register Now</button>
+                        
+                        </div>
+                           
+                </div>
+                <script type="text/javascript">
+                function patireg(type){
+                	var name=document.getElementById("pname").value;
+                	var email=document.getElementById("pemail1").value;
+                	var contact=document.getElementById("pcontactid").value;
+                	var blood=document.getElementById("pbloodgroup").value;
+                	var address=document.getElementById("paddress").value;
+                	var district=document.getElementById("pdistrict").value;
+                	var pwd1=document.getElementById("ppassword1").value;
+                	var pwd2=document.getElementById("papassword").value;
+                	var dob=document.getElementById("pdob").value;
+                	var gender=document.getElementById("pgender").value;
+                	if(name==""){
+                		alert("Enter the Name!!!");
+                	}
+                	else if(email==""){
+                		alert("Enter the email ID!!!");
+                	}
+                	else if(!email.endsWith("@gmail.com")){
+                		alert("Enter the correct Email Address!!!");
+                	}
+                	else if(contact==""){
+                		alert("Enter the Contact Number!!!");
+                	}
+                	else if(blood==""){
+                		alert("Choose the Blood Group!!!");
+                	}
+                	else if(address==""){
+                		alert("Enter the Address!!!");
+                	}
+                	else if(district==""){
+                		alert("Enter the district!!!");
+                	}
+                	else if(dob==""){
+                		alert("Choose your DOB!!!");
+                	}
+                	else if(gender==""){
+                		alert("Choose your Gender!!!");
+                	}
+                	else if(pwd1==""){
+                		alert("Enter the Password!!!");
+                	}
+                	else if(pwd2==""){
+                		alert("Enter the Confirm Password!!!");
+                	}
+                	else if(pwd1!=pwd2){
+                		alert("Invalid Password or Confirm Password!!!");
+                	}
+                	else{
+	                	var xml=new XMLHttpRequest();
+	              		xml.onreadystatechange=function(){
+	              			if(xml.readyState==4){
+	              				var txt=xml.responseText;
+	              				if(txt=="success"){
+	              					localStorage.setItem("mypatientemail",document.getElementById("pemail1").value);
+	              					//window.location.href="doctor.html";
+	              					window.open("patient.html","_self");
+	              			    	document.getElementById(compiler).style.display="block";
+	              				}
+	              				else{
+	              					document.getElementById("pdemo").innerHTML=txt;
+	              				}
+	              			}
+	              		};
+	              		var parmas="pname="+name+"&pemail="+email+"&pcontactid="+contact+"&pbloodgroup="+blood+"&paddress="+address+"&pdistrict="+district+"&ppassword="+pwd1+"&psubmit="+type+"&dob="+dob+"&gender="+gender;
+	              		xml.open("POST",action="patient_login_register", true);
+	              		xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	              		xml.send(parmas);
+                	}
+                }
+                </script>
+
+
+                <div class="collapse lab-reg" style="margin-left: 10%;">  
+                        <h3 class="text-center text-dark">REGISTER
+                        </h3>
+                        <i class="fas fa-user"></i>
+                            <label for="lName">Lab Name</label>
+                              <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Name">
+
+                            <i class="fas fa-envelope"></i>
+                            <label for="lemail">Email</label>
+                              <input type="email" class="form-control" id="lemail" name="lemail" placeholder="sample123@gmail.com">
+
+                              <i class="fas fa-phone"></i>
+                            <label for="lContact">Contact No</label>
+                              <input type="number" class="form-control" id="lcontactid" name="lcontact" placeholder="Contact no">
+
+                              <i class="far fa-address-card"></i>
+                            <label for="laddress">Address</label>
+                              <input type="text" class="form-control" id="laddress" name="laddress" placeholder="Address" required >
+
+                              <i class="fas fa-city"></i>
+                              <label for="lcity">District</label>
+                              <select class="form-control" id="ldistrict" name="ldistrict">
+                                <option>None</option>
+                                <option>Ariyalur</option>
+                                <option>Chengalpattu</option>
+                                <option>Chennai</option>
+                                <option>Coimbatore</option>
+                                <option>Cuddalore</option>
+                                <option>Dharmapuri</option>
+                                <option>Dindigul</option>
+                                <option>Erode</option>
+                                <option>Kallakurichi</option>
+                                <option>Kanchipuram</option>
+                                <option>Kanyakumari</option>
+                                <option>Karur</option>
+                                <option>Krishnagiri</option>
+                                <option>Madurai</option>
+                                <option>Mayiladuthurai</option>
+                                <option>Nagapattinam</option>
+                                <option>Namakkal</option>
+                                <option>Nilgiris</option>
+                                <option>Perambalur</option>
+                                <option>Pudukkottai</option>
+                                <option>Ramanathapuram</option>
+                                <option>Ranipet</option>
+                                <option>Salem</option>
+                                <option>Sivagangai</option>
+                                <option>Tenkasi</option>
+                                <option>Thanjavur</option>
+                                <option>Theni</option>
+                                <option>Thoothukudi</option>
+                                <option>Tiruchirappalli</option>
+                                <option>Tirunelveli</option>
+                                <option>Tirupattur</option>
+                                <option>Tiruppur</option>
+                                <option>Tiruvallur</option>
+                                <option>Tiruvannamalai</option>
+                                <option>Tiruvarur</option>
+                                <option>Vellore</option>
+                                <option>Viluppuram</option>
+                                <option>Virudhunagar</option>
+                              </select>
+
+                              <i class="fas fa-lock"></i>
+                            <label for="lpassword">Password</label>
+                              <input type="password" class="form-control" id="lpassword" name="lpassword1" placeholder="Password">
+
+                              <i class="fas fa-lock"></i>
+                            <label for="lpassword">Confirm Password</label>
+                              <input type="password" class="form-control" id="lapassword" name="lpassword2" placeholder="Confirm password">
+
+                              <a href="#"class="float-right lab1" >Already have account?</a><br>
+                        
+                    <div class="form-group text-center" style="margin:20px 0;">
+                      <button type="submit" class="btn btn-success" name="lsubmit" value="lregister" onclick="labreg('register')">Submit</button>
+                        
+                        </div>
+                           
+                </div>
+                
+
+			<script>
+				function labreg(type){
+					var name=document.getElementById("lname").value;
+					var email=document.getElementById("lemail").value;
+					var phone=document.getElementById("lcontactid").value;
+					var address=document.getElementById("laddress").value;
+					var city=document.getElementById("ldistrict").value;
+					var password=document.getElementById("lpassword").value;
+					var password1=document.getElementById("lapassword").value;
+					if(name==""){
+						alert("Enter the Laboratory Name!!!");
+					}
+					else if(email==""){
+						alert("Enter the Email!!!");
+					}
+					else if(phone==""){
+						alert("Enter the Contact Number!!!");
+					}
+					else if(address==""){
+						alert("Enter the Laboratory Address!!!");
+					}
+					else if(city==""){
+						alert("Enter the City!!!");
+					}
+					else if(password==""){
+						alert("Enter the Password!!!");
+					}
+					else if(password1==""){
+						alert("Enter the Confirm Password!!!");
+					}
+					else if(password!=password1){
+						alert("invalid PAssword or Confirm Password!!!");
+					}
+					else{
+						var xml=new XMLHttpRequest();
+						xml.onreadystatechange=function(){
+							if(xml.readyState==4){
+								var txt=xml.responseText;
+								if(txt=="success"){
+									localStorage.setItem("myvalue",document.getElementById("demail1").value);
+									//window.location.href="doctor.html";
+									window.open("doc-verification.html","_self");
+							    	document.getElementById(compiler).style.display="block";
+								}
+								else{
+									alert(txt);
+								}
+								
+							}
+						};
+						var parmas="name="+name+"&email="+email+"&password="+password+"&type="+type+"&phone="+phone+"&address="+address+"&city="+city;
+						xml.open("POST",action="lab_login_register", true);
+						xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+						xml.send(parmas);
+					}
+				}
+			</script>
+			
+			<div class="collapse hospital" style="margin-top: 18%;margin-left: 10%;">
+	            <h1 class="text-center" style="margin-bottom: 10%;">Welcome</h1>
+	            <h3 class="text-center text-dark">SIGN-UP
+	            </h3>
+	            <div class="bg-danger text-center text-white" id="hosdemo"></div>
+	            <i class="fas fa-envelope"></i>
+	                <label for="email">Email</label>
+	                  <input type="email" class="form-control" id="hemail" name="hemail" placeholder="sample123@gmail.com" required>
+	
+	                <i class="fas fa-lock"></i>
+	                <label for="password">Password</label>
+	                  <input type="password" class="form-control" id="hpassword1" name="hpassword1" placeholder="Password" required="">
+	            <div class="checkbox">
+	              <label>
+	                <input type="checkbox">Remember me
+	              </label>
+	            </div>
+	            <a href="#" class="float-right hos-reg1" style="margin-top: -7%;">Create New Account</a>
+	            <div class="form-group text-center" style="margin:20px 0;">
+	            <button type="button" class="btn btn-success text-center" onclick="hoslog('login')" >submit</button>
+				</div>
+	            <a href="#" class="text-dark choose1"><i class='fas fa-backward' style='font-size:15px;color:black; margin-right: 1px;'></i><u>Back</u></a>
+	          </div>
+	          
+	          <div class="collapse hos-reg" style="margin-left: 10%;">  
+	            <h3 class="text-center text-dark">REGISTER
+	            </h3>
+	            
+	            <i class="fas fa-user"></i>
+	                <label for="dName">Hospital Name</label>
+	                  <input type="text" class="form-control" id="hname1" placeholder="Enter Name">
+	
+	                <i class="fas fa-envelope"></i>
+	                <label for="demail">Email</label>
+	                  <input type="email" class="form-control" id="hemail1"  placeholder="sample123@gmail.com">
+	
+	                  <i class="fas fa-phone"></i>
+	                <label for="dContact">Contact No</label>
+	                  <input type="Number" class="form-control" id="hcontactid" placeholder="Contact no">
+	
+						<label for="hosadd">Hospital Address</label>
+	                  <textarea class="form-control" rows="5" id="hosaddress" ></textarea>
+						
+						<i class="fas fa-city"></i>
+	                  <label for="dcity">District</label>
+	                  <select class="form-control" id="hdistrict1">
+	                    <option>None</option>
+	                    <option>Ariyalur</option>
+	                    <option>Chengalpattu</option>
+	                    <option>Chennai</option>
+	                    <option>Coimbatore</option>
+	                    <option>Cuddalore</option>
+	                    <option>Dharmapuri</option>
+	                    <option>Dindigul</option>
+	                    <option>Erode</option>
+	                    <option>Kallakurichi</option>
+	                    <option>Kanchipuram</option>
+	                    <option>Kanyakumari</option>
+	                    <option>Karur</option>
+	                    <option>Krishnagiri</option>
+	                    <option>Madurai</option>
+	                    <option>Mayiladuthurai</option>
+	                    <option>Nagapattinam</option>
+	                    <option>Namakkal</option>
+	                    <option>Nilgiris</option>
+	                    <option>Perambalur</option>
+	                    <option>Pudukkottai</option>
+	                    <option>Ramanathapuram</option>
+	                    <option>Ranipet</option>
+	                    <option>Salem</option>
+	                    <option>Sivagangai</option>
+	                    <option>Tenkasi</option>
+	                    <option>Thanjavur</option>
+	                    <option>Theni</option>
+	                    <option>Thoothukudi</option>
+	                    <option>Tiruchirappalli</option>
+	                    <option>Tirunelveli</option>
+	                    <option>Tirupattur</option>
+	                    <option>Tiruppur</option>
+	                    <option>Tiruvallur</option>
+	                    <option>Tiruvannamalai</option>
+	                    <option>Tiruvarur</option>
+	                    <option>Vellore</option>
+	                    <option>Viluppuram</option>
+	                    <option>Virudhunagar</option>
+	                  </select>
+	                  
+	                  <label for="openhrs">Opening hours</label>
+	                  <textarea class="form-control" rows="5" id="hopenhrs1"></textarea>
+	
+	                  <i class="fas fa-lock"></i>
+	                <label for="dpassword">Password</label>
+	                  <input type="password" class="form-control" id="hpassword11"  placeholder="Password">
+	
+	                  <i class="fas fa-lock"></i>
+	                <label for="aContact">Confirm Password</label>
+	                  <input type="password" class="form-control" id="hapassword" placeholder="Confirm password">
+	                  
+	                  <div class="bg-danger text-center text-white" id="invalidpwd"></div>
+	
+	                  <a href="#" class="float-right hospital1" >Already have account?</a><br>
+	            
+	            <div class="form-group text-center" style="margin:20px 0;">
+	            <button type="button" class="btn btn-success text-center" onclick="hosreg('register')" >Register Now</button>              
+	            </div>
+	          </div>
+			
+
+          <div class="img">
+            <div class="carousel slide collapse show img1" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img class="d-block" src="https://images.template.net/wp-content/uploads/2015/05/15141503/Medical-Website.png" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block" src="https://explore.easyprojects.net/wp-content/uploads/2016/04/Healthcare-Project-Management-Software-1091x640.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block" src="https://s3.amazonaws.com/thumbnails.venngage.com/template/f8f17dd4-6ffa-452e-9dab-61ad25af08ab.png" alt="Third slide">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="collapse about">Welcome</div>
+      </div>
+    </div>
+
+  </form>
+
+
+  <script>
+    $(document).ready(function(){
+      $(".login1").click(function(){
+        $(".about").collapse('hide');
+        $(".choose").collapse('hide');
+        $(".doctor").collapse('hide');
+        $(".patient").collapse('hide');
+        $(".lab").collapse('hide');
+        $(".doc-reg").collapse('hide');
+        $(".pati-reg").collapse('hide');
+        $(".lab-reg").collapse('hide');
+        $(".admin").collapse('hide');
+        $(".admin-reg").collapse('hide');
+        $(".img1").collapse('show');
+        $(".login").collapse('show');
+      });
+      $(".admin1").click(function(){
+          $(".about").collapse('hide');
+          $(".choose").collapse('hide');
+          $(".doctor").collapse('hide');
+          $(".patient").collapse('hide');
+          $(".lab").collapse('hide');
+          $(".doc-reg").collapse('hide');
+          $(".pati-reg").collapse('hide');
+          $(".lab-reg").collapse('hide');
+          $(".admin-reg").collapse('hide');
+          $(".img1").collapse('show');
+          $(".login").collapse('hide');
+          $(".admin").collapse('show');
+        });
+      $(".admin-reg1").click(function(){
+          $(".about").collapse('hide');
+          $(".choose").collapse('hide');
+          $(".doctor").collapse('hide');
+          $(".patient").collapse('hide');
+          $(".lab").collapse('hide');
+          $(".doc-reg").collapse('hide');
+          $(".pati-reg").collapse('hide');
+          $(".lab-reg").collapse('hide');
+          $(".img1").collapse('show');
+          $(".login").collapse('hide');
+          $(".admin").collapse('hide');
+          $(".admin-reg").collapse('show');
+        });
+      $(".about1").click(function(){
+        $(".login").collapse('hide');
+        $(".choose").collapse('hide');
+        $(".img1").collapse('hide');
+        $(".doctor").collapse('hide');
+        $(".patient").collapse('hide');
+        $(".lab").collapse('hide');
+        $(".doc-reg").collapse('hide');
+        $(".pati-reg").collapse('hide');
+        $(".lab-reg").collapse('hide');
+        $(".admin").collapse('hide');
+        $(".admin-reg").collapse('hide');
+        $(".about").collapse('show');
+      });
+      $(".choose1").click(function(){
+        $(".about").collapse('hide');
+        $(".login").collapse('hide');
+        $(".doctor").collapse('hide');
+        $(".patient").collapse('hide');
+        $(".lab").collapse('hide');
+        $(".doc-reg").collapse('hide');
+        $(".pati-reg").collapse('hide');
+        $(".lab-reg").collapse('hide');
+        $(".admin").collapse('hide');
+        $(".admin-reg").collapse('hide');
+        $(".choose").collapse('show');
+      });
+      $(".doctor1").click(function(){
+        $(".about").collapse('hide');
+        $(".login").collapse('hide');
+        $(".choose").collapse('hide');
+        $(".patient").collapse('hide');
+        $(".lab").collapse('hide');
+        $(".doc-reg").collapse('hide');
+        $(".pati-reg").collapse('hide');
+        $(".lab-reg").collapse('hide');
+        $(".admin").collapse('hide');
+        $(".admin-reg").collapse('hide');
+        $(".doctor").collapse('show');
+      });
+      $(".patient1").click(function(){
+        $(".about").collapse('hide');
+        $(".login").collapse('hide');
+        $(".choose").collapse('hide');
+        $(".doctor").collapse('hide');
+        $(".lab").collapse('hide');
+        $(".doc-reg").collapse('hide');
+        $(".pati-reg").collapse('hide');
+        $(".lab-reg").collapse('hide');
+        $(".admin").collapse('hide');
+        $(".admin-reg").collapse('hide');
+        $(".patient").collapse('show');
+      });
+      $(".lab1").click(function(){
+        $(".about").collapse('hide');
+        $(".login").collapse('hide');
+        $(".choose").collapse('hide');
+        $(".doctor").collapse('hide');
+        $(".patient").collapse('hide');
+        $(".doc-reg").collapse('hide');
+        $(".pati-reg").collapse('hide');
+        $(".lab-reg").collapse('hide');
+        $(".admin").collapse('hide');
+        $(".admin-reg").collapse('hide');
+        $(".lab").collapse('show');
+      });
+      $(".hospital1").click(function(){
+          $(".about").collapse('hide');
+          $(".login").collapse('hide');
+          $(".choose").collapse('hide');
+          $(".doctor").collapse('hide');
+          $(".patient").collapse('hide');
+          $(".doc-reg").collapse('hide');
+          $(".pati-reg").collapse('hide');
+          $(".lab-reg").collapse('hide');
+          $(".admin").collapse('hide');
+          $(".admin-reg").collapse('hide');
+          $(".lab").collapse('hide');
+          $(".hospital").collapse('show');
+          $(".hos-reg").collapse('hide');
+        });
+      $(".hos-reg1").click(function(){
+          $(".about").collapse('hide');
+          $(".login").collapse('hide');
+          $(".choose").collapse('hide');
+          $(".doctor").collapse('hide');
+          $(".patient").collapse('hide');
+          $(".doc-reg").collapse('hide');
+          $(".pati-reg").collapse('hide');
+          $(".lab-reg").collapse('hide');
+          $(".admin").collapse('hide');
+          $(".admin-reg").collapse('hide');
+          $(".lab").collapse('hide');
+          $(".hospital").collapse('hide');
+          $(".hos-reg").collapse('show');
+        });
+      $(".doc-reg1").click(function(){
+        $(".about").collapse('hide');
+        $(".login").collapse('hide');
+        $(".choose").collapse('hide');
+        $(".doctor").collapse('hide');
+        $(".patient").collapse('hide');
+        $(".lab").collapse('hide');
+        $(".pati-reg").collapse('hide');
+        $(".lab-reg").collapse('hide');
+        $(".admin").collapse('hide');
+        $(".admin-reg").collapse('hide');
+        $(".doc-reg").collapse('show');
+      });
+      $(".pati-reg1").click(function(){
+        $(".about").collapse('hide');
+        $(".login").collapse('hide');
+        $(".choose").collapse('hide');
+        $(".doctor").collapse('hide');
+        $(".patient").collapse('hide');
+        $(".lab").collapse('hide');
+        $(".doc-reg").collapse('hide');
+        $(".lab-reg").collapse('hide');
+        $(".admin").collapse('hide');
+        $(".admin-reg").collapse('hide');
+        $(".pati-reg").collapse('show');
+      });
+      $(".lab-reg1").click(function(){
+        $(".about").collapse('hide');
+        $(".login").collapse('hide');
+        $(".choose").collapse('hide');
+        $(".doctor").collapse('hide');
+        $(".patient").collapse('hide');
+        $(".lab").collapse('hide');
+        $(".doc-reg").collapse('hide');
+        $(".pati-reg").collapse('hide');
+        $(".admin").collapse('hide');
+        $(".admin-reg").collapse('hide');
+        $(".lab-reg").collapse('show');
+      });
+    });
+  </script>
+</body>
+</html>

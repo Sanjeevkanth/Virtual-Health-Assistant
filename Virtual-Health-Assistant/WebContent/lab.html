@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Laboratory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <style>
+    
+.a1:hover{
+          margin-top: -1.5%;
+        }
+  </style>
+  
+</head>
+<body>
+<script>
+  	var lab_email= localStorage.getItem("mylabemail");
+  	
+  	function todayTest(){
+  		
+  		var xml=new XMLHttpRequest();
+  		xml.onreadystatechange=function(){
+  			if(xml.readyState==4){
+  				var txt=xml.responseText;
+  				
+  				document.getElementById("todaylabtest").innerHTML=txt;
+  			}
+  		};
+  		var today = new Date(); 
+  		var dd = today.getDate();
+  		if(dd<10){
+  			dd="0"+dd;
+  		}
+  		var mm = today.getMonth() + 1; 
+  		if(mm<10){
+  			mm="0"+mm;
+  		}
+  		var yy = today.getFullYear(); 
+  		var date=yy+"-"+mm+"-"+dd;
+  		var parmas="date="+date+"&email="+lab_email+"&type=todaytest";
+  		xml.open("POST",action="appointment", true);
+  		xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  		xml.send(parmas);
+  	}
+  	
+  	function previoustest(){
+  		var xml=new XMLHttpRequest();
+  		xml.onreadystatechange=function(){
+  			if(xml.readyState==4){
+  				var txt=xml.responseText;
+  				
+  				document.getElementById("previouslabtest").innerHTML=txt;
+  			}
+  		};
+  		var today = new Date(); 
+  		var dd = today.getDate();
+  		if(dd<10){
+  			dd="0"+dd;
+  		}
+  		var mm = today.getMonth() + 1; 
+  		if(mm<10){
+  			mm="0"+mm;
+  		}
+  		var yy = today.getFullYear(); 
+  		var date=yy+"-"+mm+"-"+dd;
+  		var parmas="date="+date+"&email="+lab_email+"&type=previoustest";
+  		xml.open("POST",action="appointment", true);
+  		xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  		xml.send(parmas);
+  	}
+  	function labtestupload(xz){
+  		var n="labresultpdf"+xz;
+  		var nn=document.getElementById(n).value;
+  		var res=nn.split("&&");
+  		var xml=new XMLHttpRequest();
+  		xml.onreadystatechange=function(){
+  			if(xml.readyState==4){
+  				var txt=xml.responseText;
+  				var r=txt.split("&&");
+  				document.getElementById("uploadlabresultpatientname").innerHTML=res[2];
+  				document.getElementById("uploadlabresultdoctorname").innerHTML=r[0];
+  				document.getElementById("uploadlabresultpatientid").value=res[0];
+  				document.getElementById("uploadlabresultHospitalname").innerHTML=r[1];
+  				document.getElementById("uploadlabresulttestname").innerHTML=res[3];
+  				$(document).ready(function(){
+  	    			$(".uploadlabresultpdf").collapse('show');
+  	    			$(".previoustest").collapse('hide');
+  	    			$(".todaytest").collapse('hide');
+  	    		});
+  			}
+  		};
+  		var parmas="id="+res[0]+"&email="+res[1]+"&type=labtestupload";
+  		xml.open("POST",action="appointment", true);
+  		xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  		xml.send(parmas);
+  		
+  	}
+  </script>
+  <nav class="navbar navbar-expand-md bg-info navbar-dark">
+    <h4>Lab</h4>
+    <button class="navbar-toggler btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar" >
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-white main1" href="#">Home</a>
+      </li>
+
+      <li class="nav-item">
+        <div class="dropdown" style="margin-right: 3%;">
+      <a href="#" data-toggle="dropdown" class="nav-link text-white dropdown-toggle">test</a>
+      <div class="dropdown-menu bg-success">
+        <a class="dropdown-item text-dark todaytest1" href="#" onclick="todayTest()">Today Test on Due</a>
+        <a class="dropdown-item text-dark previoustest1" href="#" onclick="previoustest()">Previous Test on Due</a>
+      </div>
+      </div>
+      </li>
+
+      
+      
+      
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">details</a>
+      </li>    
+    </ul>
+  </div> 
+  </nav>
+  <div class="main collapse show">
+  <img src="post-temp.png" class="img-fluid" style="height: 74vh; width: 100vw;">
+  <div class="container-fluid row collapse show front justify-content-center" style="margin-top: -5%;">
+    
+    <div class="card a1 col-md-3 col-sm-6 col-xs-2" style="background-color: #b3e6ff;border-top-right-radius: 15%;border-bottom-left-radius: 15%;">
+      <div class="card-body text-dark"><h4 style="margin-top: 2%;"><b>Previous test on due</b></h4>
+        <p>What are test are in balance?</p><br>
+        <button class="btn-info previoustest1" style="border-radius: 18px;margin-top: 1%;" onclick="previoustest()">details</button></div>
+    </div>
+    <div class="card a1 col-md-3 col-sm-6 col-xs-2" style="background-color: #b3e6ff;border-top-right-radius: 15%;border-bottom-left-radius: 15%;">
+      <div class="card-body text-dark"><h4 style="margin-top: 2%;"><b>Today test</b></h4>
+        <p>Today test from doctor.</p><br>
+        <button class="btn-info todaytest1" style="border-radius: 18px;margin-top: 1%;" onclick="todayTest()">details</button></div>
+    </div>
+    
+  </div>
+  </div>
+  <div class="text-center previoustest container-fluid collapse">
+  	<h3>Previous Test On-Due</h3>
+  	<table class="table table-striped  table-hover text-center" style="border:1;width:100%;">
+		<thead>
+			<tr>
+			<th>S.no</th>
+			<th>Date</th>
+			<th>Test</th>
+			<th>Patient Name</th>
+			<th>Patient ID</th>
+			<th>Doctor name</th>
+			<th>Upload Status</th>
+			</tr>
+		</thead>
+		<tbody id="previouslabtest">
+		</tbody>
+	</table>
+  </div>
+  <div class="text-center todaytest container-fluid collapse">
+  	<h3>Today Test On-Due</h3>
+  	<table class="table table-striped  table-hover text-center" style="border:1;width:100%;">
+		<thead>
+			<tr>
+			<th>S.no</th>
+			<th>Test</th>
+			<th>Patient Name</th>
+			<th>Patient ID</th>
+			<th>Doctor name</th>
+			<th>Upload Status</th>
+			</tr>
+		</thead>
+		<tbody id="todaylabtest">
+		</tbody>
+	</table>
+  </div>
+  <form method="post" action="uploadfile" enctype="multipart/form-data">
+  <div class="container-fluid collapse uploadlabresultpdf">
+  	<br><br><div class="card container-fluid">
+  		<div class="card-body col-md-12" style="background-color: #ffffff;">
+  			<div class="row">
+  				<div class="col-md-2">Patient Name :</div>
+  				<div class="card col-md-2" id="uploadlabresultpatientname"></div>
+  				<div class="col-md-4"></div>
+  				<div class="col-md-2">Doctor Name :</div>
+  				<div class="card col-md-2" id="uploadlabresultdoctorname"></div>
+  			</div>
+  			<br>
+  			<div class="row">
+  				<div class="col-md-2">Patient ID :</div>
+  				<div class="col-md-2"><input type="text" name="uploadlabresultpatientid"></div>
+  				<div class="col-md-4"></div>
+  				<div class="col-md-2">Hospital Name :</div>
+  				<div class="card col-md-2" id="uploadlabresultHospitalname"></div>
+  			</div><br>
+  			<div class="row">
+  				<div class="col-md-2">Test Name :</div>
+  				<div class="card col-md-2" id="uploadlabresulttestname"></div>
+  			</div><br>
+  			<h3><u>Upload Test Result:</u></h3>
+  			<div class="card container-fluid">
+  				<div class="card-body">
+  					<div class="row">
+		  				<div class="col-md-2">result :</div>
+		  				<div class="form-check-inline">
+						  <label class="form-check-label">
+						    <input type="radio" class="form-check-input" name="resultreport" value="+VE">+VE
+						  </label>
+						</div>
+						<div class="form-check-inline">
+						  <label class="form-check-label">
+						    <input type="radio" class="form-check-input" name="resultreport" value="-VE">-VE
+						  </label>
+						</div>
+		  			</div><br>
+		  			<div class="row">
+		  				<div class="col-md-2">Upload Result as PDF:</div>
+		  				<input type="file" name="labresultPDF">
+		  			</div>
+  				</div>
+  			</div><br>
+  			<button class="btn btn-success" id="labresultpdf" value="submit">Submit</button>
+  		</div>
+  	</div>
+  </div>
+  </form>
+  <script>
+  $(document).ready(function(){
+		$(".main1").click(function(){
+			$(".todaytest").collapse('hide');
+			$(".previoustest").collapse('hide');
+			$(".main").collapse('show');
+			$(".uploadlabresultpdf").collapse('hide');
+		});
+		$(".todaytest1").click(function(){
+			$(".todaytest").collapse('show');
+			$(".previoustest").collapse('hide');
+			$(".main").collapse('hide');
+			$(".uploadlabresultpdf").collapse('hide');
+		});
+		$(".previoustest1").click(function(){
+			$(".todaytest").collapse('hide');
+			$(".previoustest").collapse('show');
+			$(".main").collapse('hide');
+			$(".uploadlabresultpdf").collapse('hide');
+		});
+  });
+  </script>
+</body>
+</html>
